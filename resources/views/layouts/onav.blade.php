@@ -5,7 +5,7 @@
     <div class="container">
 
         <a class="navbar-brand" href="{{ url('/home') }}">
-            {{ config('app.name', 'BigT') }}
+            {{ config('app.name', 'TEST') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
         <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
                     <h6> TEST in progress </h6>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="10"
-                        aria-valuemin="0" aria-valuemax="100" style="width: 60%;">10%</div>
+                        aria-valuemin="0" aria-valuemax="100" style="width: 20%;">20%</div>
                     </div>
                 </div>
             </ul>
