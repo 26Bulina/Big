@@ -42,8 +42,6 @@
 <li class="{{ Request::is('items*') ? 'active' : '' }}">
     <a href="{!! route('items.index') !!}"><i class="fa fa-edit"></i><span>Items</span></a>
 </li>
-
 <li class="{{ Request::is('notifications*') ? 'active' : '' }}">
-    <a href="{!! route('notifications.index') !!}"><i class="fa fa-edit"></i><span>Notifications</span></a>
-</li>
-
+    <a href="{!! route('notifications.index') !!}"><i class="fa fa-edit"></i><span>N</span></a>
+<li>

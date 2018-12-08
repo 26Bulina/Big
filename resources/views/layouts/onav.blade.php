@@ -51,11 +51,12 @@
                 </div>
                  <!-- NOTIFICARI -->
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <a class="{{ Request::is('notifications*') ? 'active' : '' }}" href="{!! route('notifications.index') !!}"> <span>Notifications</span></a>
+                    <button 
+                        class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Notif
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Actualizari app</a>
+                        <a class="dropdown-item" href="{!! route('notifications.index') !!}">notifications</a>
                         <a class="dropdown-item" href="#">cerinta raportata</a>
                         <a class="dropdown-item" href="#">HppyBday</a>
                         <a class="dropdown-item" href="#">activitati team-building</a>
