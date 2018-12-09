@@ -17,10 +17,10 @@
             <!-- LEFT OF ONAV-->
             <ul class="navbar-nav mr-auto">
                 <div class="well">
-                    <h6> TEST in progress </h6>
+                    <h6> work in progress </h6>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="10"
-                        aria-valuemin="0" aria-valuemax="100" style="width: 20%;">20%</div>
+                        aria-valuemin="0" aria-valuemax="100" style="width: 10%;">10%</div>
                     </div>
                 </div>
             </ul>
