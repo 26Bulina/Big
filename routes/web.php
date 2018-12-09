@@ -48,3 +48,5 @@ Route::group(['middleware' => ['web','auth']] , function(){
 
 
 Route::resource('items', 'ItemController');
+
+Route::resource('notifications', 'NotificationController');

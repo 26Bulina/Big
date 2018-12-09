@@ -18,7 +18,8 @@
             <tr>
               <th>NR</th>
               <th>nume membru</th>
-              <th>email</th>
+              <th>mail</th>
+              <th>id</th>
             </tr>
           </thead>
           <?php $key=0; ?>
@@ -28,6 +29,7 @@
               <td>{{ $key+1 }}</td>
               <td>{{ $value->name }}</td>
               <td>{{ $value->email }}</td>
+              <td>{{ $value->id }}</td>
             </tr>
             @endforeach
           </tbody>
