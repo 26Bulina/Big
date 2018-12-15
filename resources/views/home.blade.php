@@ -13,7 +13,8 @@
                         </div>
                     @endif
                         <div class="alert alert-success" role="alert">
-                            <p> Esti logat ca USER</p>
+                            <p> Bine ai venit, {{ Auth::user()->name }} !</p>  
+
                         </div>
                 </div>
             </div>

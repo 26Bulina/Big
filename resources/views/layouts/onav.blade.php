@@ -56,7 +56,7 @@
                     Notif
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{!! route('notifications.index') !!}">notifications</a>
+                        <a class="dropdown-item" href="{!! route('notifs.index') !!}">notifs</a>
                         <a class="dropdown-item" href="#">cerinta raportata</a>
                         <a class="dropdown-item" href="#">HppyBday</a>
                         <a class="dropdown-item" href="#">activitati team-building</a>
@@ -92,13 +92,11 @@
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                           {{csrf_field() }}
                         </form>
                     </div>
                 </li>

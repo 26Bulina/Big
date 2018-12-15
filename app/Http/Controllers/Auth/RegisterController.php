@@ -37,7 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
     /**
@@ -63,10 +63,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        // $empls = empl::pluck('name','id');
+        // return view('users.create',compact('empls'));
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
+
+
+    //     public function create()
+    // {
+    //     $users = User::pluck('name','id');
+    //     return view('notifications.create',compact('users'));
+    // }
 }
