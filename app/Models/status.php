@@ -48,4 +48,8 @@ class status extends Model
     ];
 
     
+    public function tasks()
+    {
+        return $this->hasMany('App\Model\Task');
+    }
 }

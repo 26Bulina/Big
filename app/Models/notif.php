@@ -60,6 +60,10 @@ class notif extends Model
         'title' => 'required',
         'body' => 'min:5'
     ];
-
+    
+public function user()
+    {
+        return $this->belongsTo('App\User','pers_create');
+    }
     
 }

@@ -155,4 +155,16 @@ class notifController extends AppBaseController
 
         return redirect(route('notifs.index'));
     }
+
+    // public function test(Request $request)
+    // {
+    //              $not = DB::table('notifs')
+    //                     ->select('users.email')
+    //                     ->join('users','users.id','=','notifs.pers_create')
+    //                     ->where('users.name','Alina')
+    //                     ->limit(1)
+    //                     ->orderBy('notifs.title','desc')
+    //                     ->get();
+    //             return $not;
+    // }
 }

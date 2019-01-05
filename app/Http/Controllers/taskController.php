@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
 
 use App\Http\Requests\CreatetaskRequest;
 use App\Http\Requests\UpdatetaskRequest;
@@ -14,6 +15,8 @@ use App\User;
 use App\Models\repository;
 use App\Models\status;
 use App\Models\priority;
+use App\Models\task;
+use App\Models\comment;
 use Illuminate\Support\Facades\Storage;
 
 class taskController extends AppBaseController
@@ -33,12 +36,14 @@ class taskController extends AppBaseController
      * @return Response
      */
     public function index(Request $request)
-    {
+    {   
         $this->taskRepository->pushCriteria(new RequestCriteria($request));
         $tasks = $this->taskRepository->all();
-
-        return view('tasks.index')
-            ->with('tasks', $tasks);
+                                                // ->where('pers_create', $loggegInUserId);
+        return view('tasks.index')->with('tasks', task::paginate(7));
+        // return view('tasks.index')->with('tasks', $tasks);
+        // return view('tasks.index',compact('tasks'));
+        
     }
 
     /**
@@ -82,6 +87,7 @@ class taskController extends AppBaseController
      */
     public function show($id)
     {
+        
         $task = $this->taskRepository->findWithoutFail($id);
 
         if (empty($task)) {
@@ -89,7 +95,7 @@ class taskController extends AppBaseController
 
             return redirect(route('tasks.index'));
         }
-
+        // $comments = Comment::all();
         return view('tasks.show')->with('task', $task);
     }
 
@@ -164,5 +170,22 @@ class taskController extends AppBaseController
         Flash::success('Task deleted successfully.');
 
         return redirect(route('tasks.index'));
+    }
+
+
+    public function comment(Request $request, $task_id)
+    {
+
+              // $task = $this->taskRepository->findWithoutFail($id);
+              $this->validate($request, [
+                'body'=>'required'
+                ]);
+              $comment = new comment;
+              $comment->user_id = Auth::user()->id;  //ia id-ul celui inrgistrat?????
+              $comment->task_id = $task_id;
+              $comment->body = $request->input('body');
+              $comment->save();
+              // return redirect(route('tasks.show'))->
+              return view('tasks.show')->with('response', 'comm salvat!');
     }
 }

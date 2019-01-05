@@ -47,5 +47,8 @@ class repository extends Model
         'name' => 'min:3'
     ];
 
-    
+    public function tasks()
+    {
+        return $this->hasMany('App\Model\Task');
+    }
 }

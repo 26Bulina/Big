@@ -6,14 +6,11 @@ Route::get('/app', function () {
 Route::get('/ideas', function () {
     return view('ideas');
 });
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-
 
 
 
@@ -79,6 +76,19 @@ Route::resource('periodcos', 'periodcoController');
 
 Route::resource('notifs', 'notifController');
 
+Route::get('/test', function () {
+	  $not = DB::table('notifs')
+                        ->select('users.email')
+                        ->join('users','users.id','=','notifs.pers_create')
+                        ->where('users.name','Alina')
+                        ->limit(1)
+                        ->orderBy('notifs.title','desc')
+                        ->get();
+                return $not;
+    
+    	// return view('welcome');
+	});
+
 Route::resource('statuses', 'statusController');
 
 Route::resource('priorities', 'priorityController');
@@ -96,3 +106,5 @@ Route::resource('seens', 'seenController');
 Route::resource('comments', 'commentController');
 
 Route::resource('departamentHas', 'departamenthasController');
+
+Route::post('/tasks/{task}/comments','commentController@store');

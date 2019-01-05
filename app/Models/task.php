@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Auth;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -68,5 +68,44 @@ class task extends Model
         'pers_assign' => 'required'
     ];
 
-    
+public function status()
+    {
+        return $this->belongsTo('App\Models\status','status_id');
+    }
+
+public function repository()
+    {
+        return $this->belongsTo('App\Models\repository','repository_id');
+    }
+public function priority()
+    {
+        return $this->belongsTo('App\Models\Priority','priority_id');
+    }
+public function p_create()
+    {
+        return $this->belongsTo('App\User','pers_create');
+    }
+public function p_assign()
+    {
+        return $this->belongsTo('App\User','pers_assign');
+    }
+public function comments()
+    {
+        return $this->hasMany('App\Models\comment');
+    }
+public function addComment($body)
+    {
+        
+        // $this->comments()->create(compact('body'));
+        Comment::create([
+                'body'=>request('body'),
+                'task_id'=>$this->id,
+                'user_id' => Auth::user()->id 
+        ]);
+    }
+
+public function countTask()
+    {
+    task::get()->count();
+    }
 }

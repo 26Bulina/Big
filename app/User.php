@@ -14,7 +14,7 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array
-     */
+     */ 
     protected $fillable = [
         'name', 'email', 'password','admin',
     ];
@@ -30,7 +30,17 @@ class User extends Authenticatable
 
     public function notifications()
     {
-        // return $this->hasMany(Notification::class);
         return $this->hasMany('App\Models\Notification');
     }
+
+    public function notifs()
+    {
+        return $this->hasMany('App\Models\Notif');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Models\Task');
+    }
+
 }

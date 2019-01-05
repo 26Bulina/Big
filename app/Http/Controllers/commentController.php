@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
 
 use App\Http\Requests\CreatecommentRequest;
 use App\Http\Requests\UpdatecommentRequest;
@@ -10,7 +11,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-
+use App\Models\task;
+use App\Models\comment;
 class commentController extends AppBaseController
 {
     /** @var  commentRepository */
@@ -53,15 +55,26 @@ class commentController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreatecommentRequest $request)
+    // public function store(CreatecommentRequest $request)
+    // {
+    //     $input = $request->all();
+
+    //     $comment = $this->commentRepository->create($input);
+
+    //     Flash::success('Comment saved successfully.');
+
+    //     return redirect(route('comments.index'));
+    // }
+
+    public function store(Task $task)
     {
-        $input = $request->all();
-
-        $comment = $this->commentRepository->create($input);
-
-        Flash::success('Comment saved successfully.');
-
-        return redirect(route('comments.index'));
+        $task->addComment(request('body'));
+        // Comment::create([
+        //         'body'=>request('body'),
+        //         'task_id'=>$task->id,
+        //         'user_id' => Auth::user()->id  //ia id-ul celui inrgistrat????? -- daaaaa
+        // ]);
+          return redirect(route('comments.index'));
     }
 
     /**

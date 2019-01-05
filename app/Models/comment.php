@@ -50,6 +50,9 @@ class comment extends Model
         'body' => 'min:3',
         'task_id' => 'required'
     ];
-
+public function task()
+    {
+        return $this->belongsTo('App\Models\task','task_id');
+    }
     
 }

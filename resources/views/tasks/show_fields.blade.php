@@ -1,4 +1,4 @@
-<!-- Id Field -->
+<!-- Id Field --> 
 <div class="form-group">
     {!! Form::label('id', 'Id:') !!}
     <p>{!! $task->id !!}</p>
@@ -48,7 +48,7 @@
 
 <!-- Fisier Field -->
 <div class="form-group">
-    {!! Form::label('fisier', 'Fisier:') !!}
+    {!! Form::label('fisier', 'Fisier/attach:') !!}
     <p>{!! $task->fisier !!}</p>
 </div>
 

@@ -51,6 +51,50 @@
 						</div>
 					</div>
 				</div>
+
+
+<li class="{{ Request::is('items*') ? 'active' : '' }}">
+	<a href="{!! route('items.index') !!}"><i class="fa fa-edit"></i><span>Items</span></a>
+</li>
+<li class="{{ Request::is('notifications*') ? 'active' : '' }}">
+	<a href="{!! route('notifications.index') !!}"><i class="fa fa-edit"></i><span>Notifications</span></a>
+</li>
+<li class="{{ Request::is('notifs*') ? 'active' : '' }}">
+	<a href="{!! route('notifs.index') !!}"><i class="fa fa-edit"></i><span>Notifs</span></a>
+</li>
+<li class="{{ Request::is('empls*') ? 'active' : '' }}">
+	<a href="{!! route('empls.index') !!}"><i class="fa fa-edit"></i><span>empls</span></a>
+</li>
+<li class="{{ Request::is('remembers*') ? 'active' : '' }}">
+    <a href="{!! route('remembers.index') !!}"><i class="fa fa-edit"></i><span>Remembers</span></a>
+</li>
+
+<li class="{{ Request::is('todoLists*') ? 'active' : '' }}">
+    <a href="{!! route('todoLists.index') !!}"><i class="fa fa-edit"></i><span>Todo Lists</span></a>
+</li>
+
+<li class="{{ Request::is('periodcos*') ? 'active' : '' }}">
+    <a href="{!! route('periodcos.index') !!}"><i class="fa fa-edit"></i><span>Periodcos</span></a>
+</li>
+
+<li class="{{ Request::is('statuses*') ? 'active' : '' }}">
+    <a href="{!! route('statuses.index') !!}"><i class="fa fa-edit"></i><span>Statuses</span></a>
+</li>
+
+<li class="{{ Request::is('priorities*') ? 'active' : '' }}">
+    <a href="{!! route('priorities.index') !!}"><i class="fa fa-edit"></i><span>priorities</span></a>
+</li>
+
+<li class="{{ Request::is('repositories*') ? 'active' : '' }}">
+    <a href="{!! route('repositories.index') !!}"><i class="fa fa-edit"></i><span>repositories</span></a>
+</li>
+<li class="{{ Request::is('departaments*') ? 'active' : '' }}">
+    <a href="{!! route('departaments.index') !!}"><i class="fa fa-edit"></i><span>Departaments</span></a>
+</li>
+
+<li class="{{ Request::is('tasks*') ? 'active' : '' }}">
+    <a href="{!! route('tasks.index') !!}"><i class="fa fa-edit"></i><span>Tasks</span></a>
+</li>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-<!-- Subject Field -->
+<!-- Subject Field --> 
 <div class="form-group col-sm-6">
     {!! Form::label('subject', 'Subject:') !!}
     {!! Form::text('subject', null, ['class' => 'form-control']) !!}
@@ -42,7 +42,7 @@
 
 <!-- Fisier Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('fisier', 'Fisier:') !!}
+    {!! Form::label('fisier', 'Fisier/attach:') !!}
     {!! Form::file('fisier') !!}
 </div>
 <div class="clearfix"></div>

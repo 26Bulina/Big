@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 
 @section('content')
     <section class="content-header">
@@ -17,9 +17,6 @@
             <div class="box-body">
                     @include('tasks.table')
             </div>
-        </div>
-        <div class="text-center">
-        
         </div>
     </div>
 @endsection

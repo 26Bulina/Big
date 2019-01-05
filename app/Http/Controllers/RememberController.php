@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
 
 use App\Http\Requests\CreateRememberRequest;
 use App\Http\Requests\UpdateRememberRequest;
@@ -30,12 +31,14 @@ class RememberController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $loggegInUserId = Auth::id();
         $this->rememberRepository->pushCriteria(new RequestCriteria($request));
-        $remembers = $this->rememberRepository->all();
+        $remembers = $this->rememberRepository->all()->where('user_id', $loggegInUserId);
 
         return view('remembers.index')
             ->with('remembers', $remembers);
     }
+
 
     /**
      * Show the form for creating a new Remember.

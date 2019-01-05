@@ -46,6 +46,10 @@ class priority extends Model
     public static $rules = [
         'name' => 'min:3'
     ];
-
+    
+public function tasks()
+    {
+        return $this->hasMany('App\Model\Task');
+    }
     
 }
