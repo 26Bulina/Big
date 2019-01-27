@@ -7,16 +7,6 @@
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('notifs.create') !!}">Add New</a>
         </h1>
     </section>
-
-        {{         $not = DB::table('notifs')
-                        ->select('users.email')
-                        ->join('users','users.id','=','notifs.pers_create')
-                        ->where('users.name','Alina')
-                        ->limit(2)
-                        ->orderBy('notifs.title','desc')
-                        ->get()
-        }}
-
     <div class="content">
         <div class="clearfix"></div>
 
@@ -32,7 +22,5 @@
         
         </div>
     </div>
-
-    {{-- <a href="{!! route('notifs.test') !!}" class='btn btn-success btn-xs'><i class="glyphicon glyphicon-edit"></i></a> --}}
 @endsection
 

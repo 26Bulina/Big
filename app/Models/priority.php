@@ -47,7 +47,7 @@ class priority extends Model
         'name' => 'min:3'
     ];
     
-public function tasks()
+    public function tasks()
     {
         return $this->hasMany('App\Model\Task');
     }

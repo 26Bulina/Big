@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($periodco, ['route' => ['periodcos.update', $periodco->id], 'method' => 'patch']) !!}
+                   {!! Form::model($periodco, ['route' => ['periodcos.update', $periodco->id], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
 
                         @include('periodcos.fields')
 

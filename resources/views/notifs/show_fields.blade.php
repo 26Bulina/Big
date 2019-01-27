@@ -4,10 +4,10 @@
     <p>{!! $notif->id !!}</p>
 </div>
 
-<!-- Pers Create Field -->
+<!-- User Id Field -->
 <div class="form-group">
-    {!! Form::label('pers_create', 'Pers Create:') !!}
-    <p>{!! $notif->pers_create !!}</p>
+    {!! Form::label('user_id', 'User Id:') !!}
+    <p>{!! $notif->user_id !!}</p>
 </div>
 
 <!-- Title Field -->

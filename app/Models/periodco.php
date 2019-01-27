@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Models;
 
@@ -27,7 +27,8 @@ class periodco extends Model
     public $fillable = [
         'user_id',
         'start_date',
-        'end_date'
+        'end_date',
+        'tipconcediu_id'
     ];
 
     /**
@@ -38,19 +39,30 @@ class periodco extends Model
     protected $casts = [
         'user_id' => 'integer',
         'start_date' => 'date',
-        'end_date' => 'date'
+        'end_date' => 'date',
+        'tipconcediu_id'
     ];
 
     /**
      * Validation rules
      *
-     * @var array
+     * @var array 
      */
     public static $rules = [
         'user_id' => 'required',
         'start_date' => 'required',
-        'end_date' => 'required'
+        'end_date' => 'required',
+        'tipconcediu_id' =>'required'
     ];
 
-    
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+    public function tipconcedius()
+    {
+        return $this->hasMany('App\Models\tipconcediu');
+    }
+
+
 }

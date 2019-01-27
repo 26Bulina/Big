@@ -10,7 +10,7 @@
     <tbody>
     @foreach($remembers as $remember)
         <tr>
-            <td>{!! $remember->user_id !!}</td>
+            <td>{!! $remember->user->name !!}</td>
             <td>{!! $remember->date !!}</td>
             <td>{!! $remember->message !!}</td>
             <td>

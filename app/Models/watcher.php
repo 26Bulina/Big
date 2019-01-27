@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use app\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -51,4 +51,9 @@ class watcher extends Model
     ];
 
     
+
+        public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

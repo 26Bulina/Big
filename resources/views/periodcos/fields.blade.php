@@ -16,6 +16,12 @@
     {!! Form::date('end_date', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Tip concediu Field --> 
+<div class="form-group col-sm-6">
+    {!! Form::label('tipconcediu_id', 'Tip concediu:') !!}
+    {!! Form::select('tipconcediu_id', $tipconcedius, null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

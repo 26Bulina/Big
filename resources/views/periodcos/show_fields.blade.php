@@ -22,6 +22,12 @@
     <p>{!! $periodco->end_date !!}</p>
 </div>
 
+<!-- Tip concediu Field -->
+<div class="form-group">
+    {!! Form::label('tipconcediu_id', 'tip concediu:') !!}
+    <p>{!! $periodco->tipconcediu_id !!}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}

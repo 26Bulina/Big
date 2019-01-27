@@ -13,7 +13,7 @@
                <div class="row">
                    {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
 
-                        @include('tasks.fields')
+                        @include('tasks.fieldsx') 
 
                    {!! Form::close() !!}
                </div>

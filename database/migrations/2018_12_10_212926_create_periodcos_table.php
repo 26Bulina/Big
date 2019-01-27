@@ -15,12 +15,14 @@ class CreateperiodcosTable extends Migration
     {
         Schema::create('periodcos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
             $table->softDeletes();
+            $table->integer('user_id')->unsigned();
+            $table->integer('tipconcediu_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('tipconcediu_id')->references('id')->on('tipconcedius');
         });
     }
 

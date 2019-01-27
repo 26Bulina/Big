@@ -45,7 +45,7 @@
                         <span class="fa fa-bell fa-2x" aria-hidden="true"></span> Notificari
                         <span class="badge" style="background: #D67FFFFF; position:relative;">
                             {{ App\Models\notif::where('modif_app',1)
-                            ->where('pers_create',1)
+                            //->where('pers_create',1) 
                             ->count() }}
                         </span>
 
@@ -62,7 +62,7 @@
                            
                             <span class="badge" style="background: #4D8EB1FF; ">
                                 {{  App\Models\notif::where('modif_app',1)
-                                ->where('pers_create',1)
+                                //->where('pers_create',1)
                                 ->count() }}
                             </span>
                         </div>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 <!-- AUTH -->
-                <div>
+                
                     @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -128,7 +128,7 @@
                         </div>
                     </li>
                     @endguest
-                </div>
+               
             </ul>
             
         </div>

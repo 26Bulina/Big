@@ -20,6 +20,8 @@
               <th>nume membru</th>
               <th>mail</th>
               <th>id</th>
+              <th>admin</th>
+              <th>employee_id</th>
             </tr>
           </thead>
           <?php $key=0; ?>
@@ -30,6 +32,8 @@
               <td>{{ $value->name }}</td>
               <td>{{ $value->email }}</td>
               <td>{{ $value->id }}</td>
+              <td>{{ $value->admin }}</td>
+              <td>{{ $value->employee_id }}</td>
             </tr>
             @endforeach
           </tbody>

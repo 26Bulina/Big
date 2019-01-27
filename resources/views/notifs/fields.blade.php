@@ -1,7 +1,7 @@
-<!-- Pers Create Field -->
+<!-- User Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('pers_create', 'Pers Create:') !!}
-    {!! Form::select('pers_create',$users ,null, ['class' => 'form-control']) !!}
+    {!! Form::label('user_id', 'User Id:') !!}
+    {!! Form::select('user_id', $users, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Title Field -->
@@ -11,9 +11,9 @@
 </div>
 
 <!-- Body Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('body', 'Body:') !!}
-    {!! Form::text('body', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Modif App Field -->

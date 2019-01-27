@@ -46,6 +46,12 @@
     <p>{!! $task->repository_id !!}</p>
 </div>
 
+<!-- Repository Id Field -->
+<div class="form-group">
+    {!! Form::label('departament_id', 'departament id:') !!}
+    <p>{!! $task->departament_id !!}</p>
+</div>
+
 <!-- Fisier Field -->
 <div class="form-group">
     {!! Form::label('fisier', 'Fisier/attach:') !!}

@@ -19,9 +19,10 @@ class CreatetasksTable extends Migration
             $table->text('body');
             $table->integer('pers_create')->unsigned();
             $table->integer('pers_assign')->unsigned();
-            $table->integer('status_id')->unsigned();
+            $table->integer('status_id')->unsigned()->default(1);
             $table->integer('priority_id')->unsigned();
             $table->integer('repository_id')->unsigned();
+            // $table->integer('departament_id')->unsigned();
             $table->string('fisier');
             $table->timestamps();
             $table->softDeletes();
@@ -30,6 +31,7 @@ class CreatetasksTable extends Migration
             $table->foreign('status_id')->references('id')->on('statuses');
             $table->foreign('priority_id')->references('id')->on('priorities');
             $table->foreign('repository_id')->references('id')->on('repositories');
+            // $table->foreign('departament_id')->references('id')->on('departamenthas');
         });
     }
 

@@ -1,16 +1,67 @@
 <?php
 
 Route::get('/app', function () {
+
     return view('layouts/app');
 });
 Route::get('/ideas', function () {
     return view('ideas');
 });
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/test', function () {
+
+	  $not = DB::table('notifs')
+                        ->select('users.email')
+                        ->join('users','users.id','=','notifs.pers_create')
+                        ->where('users.name','Alina')
+                        ->limit(1)
+                        ->orderBy('notifs.title','desc')
+                        ->get();
+                return $not;
+    
+    	// return view('welcome');
+	});
+
+
+
+Route::resource('tasks', 'taskController');
+Route::get ('/search', 'taskController@search');
+
+Route::resource('comments', 'commentController');
+Route::post('/tasks/{task}/comments','commentController@store');
+
+
+
+
+
+Route::resource('remembers', 'RememberController');
+Route::resource('todoLists', 'todolistController');
+Route::resource('periodcos', 'periodcoController');
+Route::resource('notifs', 'notifController');
+
+
+
+Route::resource('employees', 'EmployeeController');
+Route::resource('jobs', 'JobController');
+Route::resource('tipconcedius', 'tipconcediuController');
+Route::resource('departaments', 'departamentController');
+Route::resource('zilecos', 'zilecoController');
+Route::resource('statuses', 'statusController');
+Route::resource('priorities', 'priorityController');
+Route::resource('repositories', 'repositoryController');
+
+
+
+Route::resource('watchers', 'watcherController');
+Route::resource('seens', 'seenController');
+
+
+
+
 
 
 
@@ -36,13 +87,14 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 
 Route::group(['middleware' => ['auth']] , function(){
 	Route::get('/', function () {
+		// $u = App\User::get();
+		// \Debugar::info($u);
     	return view('welcome');
 	});
 
 	Route::get('/home',function(){
 			return view('home');
 	})->name('user'); // controller 
-
 
 	// admin 
 
@@ -58,53 +110,20 @@ Route::group(['middleware' => ['auth']] , function(){
 
 });
 
+ // ?????????????
+// Route::resources([
+//     'photos' => 'PhotoController',
+//     'posts' => 'PostController'
+// ]);
 
 
 
 
-Route::resource('items', 'ItemController');
 
-Route::resource('notifications', 'NotificationController');
+// Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('empls', 'emplController');
+// Route::resource('items', 'ItemController');
 
-Route::resource('remembers', 'RememberController');
+// Route::resource('notifications', 'NotificationController');
 
-Route::resource('todoLists', 'todolistController');
-
-Route::resource('periodcos', 'periodcoController');
-
-Route::resource('notifs', 'notifController');
-
-Route::get('/test', function () {
-	  $not = DB::table('notifs')
-                        ->select('users.email')
-                        ->join('users','users.id','=','notifs.pers_create')
-                        ->where('users.name','Alina')
-                        ->limit(1)
-                        ->orderBy('notifs.title','desc')
-                        ->get();
-                return $not;
-    
-    	// return view('welcome');
-	});
-
-Route::resource('statuses', 'statusController');
-
-Route::resource('priorities', 'priorityController');
-
-Route::resource('repositories', 'repositoryController');
-
-Route::resource('departaments', 'departamentController');
-
-Route::resource('tasks', 'taskController');
-
-Route::resource('watchers', 'watcherController');
-
-Route::resource('seens', 'seenController');
-
-Route::resource('comments', 'commentController');
-
-Route::resource('departamentHas', 'departamenthasController');
-
-Route::post('/tasks/{task}/comments','commentController@store');
+// Route::resource('departamentHas', 'departamenthasController');

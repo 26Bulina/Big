@@ -12,7 +12,7 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'notifs.store','enctype' => 'multipart/form-data']) !!}
+                    {!! Form::open(['route' => 'notifs.store']) !!}
 
                         @include('notifs.fields')
 

@@ -11,8 +11,8 @@
     @foreach($comments as $comment)
         <tr>
             <td>{!! $comment->body !!}</td>
-            <td>{!! $comment->user_id !!}</td>
-            <td>{!! $comment->task_id !!}</td>
+            <td>{!! $comment->user->name !!}</td>
+            <td>{!! $comment->task->subject !!}</td>
             <td>
                 {!! Form::open(['route' => ['comments.destroy', $comment->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

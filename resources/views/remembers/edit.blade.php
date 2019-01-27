@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($remember, ['route' => ['remembers.update', $remember->id], 'method' => 'patch']) !!}
+                   {!! Form::model($remember, ['route' => ['remembers.update', $remember->id], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
 
                         @include('remembers.fields')
 

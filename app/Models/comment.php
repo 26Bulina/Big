@@ -54,5 +54,8 @@ public function task()
     {
         return $this->belongsTo('App\Models\task','task_id');
     }
-    
+public function user()
+    {
+        return $this->belongsTo('App\user');
+    }
 }

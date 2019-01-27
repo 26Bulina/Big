@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                  {!! Form::model($notif, ['route' => ['notifs.update', $notif->id], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
+                   {!! Form::model($notif, ['route' => ['notifs.update', $notif->id], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
 
                         @include('notifs.fields')
 

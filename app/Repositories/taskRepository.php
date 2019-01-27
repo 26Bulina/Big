@@ -27,6 +27,7 @@ class taskRepository extends BaseRepository
         'status_id',
         'priority_id',
         'repository_id',
+        'departament_id',
         'fisier'
     ];
 

@@ -6,6 +6,28 @@
             Task
         </h1>
     </section>
+
+
+{{-- {{ $pers_co }}
+        @foreach($nr_task as $task)
+        <tr>
+            <td>{!! $task->pers_assign !!}</td>
+            <td>{!! $task->t_dep !!}</td>
+            <td>{!! $task->nr_tsk !!}</td>
+        </tr>
+        <hr>
+        @endforeach  --}}
+
+      {{--   @foreach($pers_per_dep as $pers)
+        <hr>
+        <tr>
+            <td>{!! $pers->user !!}</td>
+            <td>{!! $pers->dep !!}</td>
+        </tr>
+        <hr>
+        @endforeach  --}}
+
+
     <div class="content">
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">

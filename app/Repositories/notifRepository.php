@@ -8,7 +8,7 @@ use InfyOm\Generator\Common\BaseRepository;
 /**
  * Class notifRepository
  * @package App\Repositories
- * @version December 10, 2018, 9:34 pm UTC
+ * @version January 6, 2019, 1:04 am UTC
  *
  * @method notif findWithoutFail($id, $columns = ['*'])
  * @method notif find($id, $columns = ['*'])
@@ -20,7 +20,7 @@ class notifRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'pers_create',
+        'user_id',
         'title',
         'body',
         'modif_app',

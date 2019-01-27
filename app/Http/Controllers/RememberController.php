@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
+use Auth; 
 
 use App\Http\Requests\CreateRememberRequest;
 use App\Http\Requests\UpdateRememberRequest;
@@ -98,6 +98,8 @@ class RememberController extends AppBaseController
      */
     public function edit($id)
     {
+        $users = User::pluck('name','id');
+        
         $remember = $this->rememberRepository->findWithoutFail($id);
 
         if (empty($remember)) {
@@ -106,7 +108,7 @@ class RememberController extends AppBaseController
             return redirect(route('remembers.index'));
         }
 
-        return view('remembers.edit')->with('remember', $remember);
+        return view('remembers.edit',compact('remember','users'));
     }
 
     /**

@@ -1,5 +1,7 @@
 {{-- inclus in layouts.app --}}
 
+     
+ 
 
 <div class="panel-group">
     <div class="panel panel-default">
@@ -21,6 +23,10 @@
             </div>
         {{-- </div> --}}
     </div>
+     <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+
 
     <div class="panel panel-default">
         <a href="{!! route('tasks.index') !!}" class="padd list-group-item">
@@ -57,23 +63,4 @@
                     <span class="fa fa-keyboard" aria-hidden="true"></span>
         </a>
 </div>
-
-
-
-
-<li class="{{ Request::is('watchers*') ? 'active' : '' }}">
-    <a href="{!! route('watchers.index') !!}"><i class="fa fa-edit"></i><span>Watchers</span></a>
-</li>
-
-<li class="{{ Request::is('seens*') ? 'active' : '' }}">
-    <a href="{!! route('seens.index') !!}"><i class="fa fa-edit"></i><span>Seens</span></a>
-</li>
-
-<li class="{{ Request::is('comments*') ? 'active' : '' }}">
-    <a href="{!! route('comments.index') !!}"><i class="fa fa-edit"></i><span>Comments</span></a>
-</li>
-
-<li class="{{ Request::is('departamentHas*') ? 'active' : '' }}">
-    <a href="{!! route('departamentHas.index') !!}"><i class="fa fa-edit"></i><span>Departament Has</span></a>
-</li>
 

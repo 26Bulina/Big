@@ -47,5 +47,14 @@ class departament extends Model
         'name' => 'min:2'
     ];
 
-    
+
+public function tasks()
+    {
+        return $this->hasMany('App\models\task');
+    }
+public function jobs()
+    {
+        return $this->hasMany('App\models\job');
+    }
+
 }

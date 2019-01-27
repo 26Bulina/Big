@@ -37,9 +37,17 @@ return [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
+            'foreign_key_constraints' => true,
         ],
 
         'mysql' => [
+            // 'read' => [
+            //     'host' => ['192.168.1.1'],
+            // ],
+            // 'write' => [
+            //     'host' => ['196.168.1.2'],
+            // ],
+            // 'sticky'    => true,
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
@@ -50,7 +58,7 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => true, // false
             'engine' => null,
         ],
 

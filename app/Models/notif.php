@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class notif
  * @package App\Models
- * @version December 10, 2018, 9:34 pm UTC
+ * @version January 6, 2019, 1:04 am UTC
  *
- * @property integer pers_create
+ * @property integer user_id
  * @property string title
  * @property string body
  * @property integer modif_app
@@ -28,7 +28,7 @@ class notif extends Model
 
 
     public $fillable = [
-        'pers_create',
+        'user_id',
         'title',
         'body',
         'modif_app',
@@ -42,7 +42,7 @@ class notif extends Model
      * @var array
      */
     protected $casts = [
-        'pers_create' => 'integer',
+        'user_id' => 'integer',
         'title' => 'string',
         'body' => 'string',
         'modif_app' => 'integer',
@@ -56,14 +56,17 @@ class notif extends Model
      * @var array
      */
     public static $rules = [
-        'pers_create' => 'required',
         'title' => 'required',
-        'body' => 'min:5'
+        'body' => 'required'
     ];
-    
 public function user()
     {
-        return $this->belongsTo('App\User','pers_create');
+        return $this->belongsTo('App\User','user_id');
+    }
+
+public function seen()
+    {
+        return $this->belongsTo('App\Models\seen');
     }
     
 }

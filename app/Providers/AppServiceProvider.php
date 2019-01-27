@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Connection;
+// use DB;
+use Event;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        DB::enableQueryLog();
+        Event::listen('kernel.handled', function ( $request, $response){
+            if($request->has('query-log')) {
+                dd(DB::getQueryLog());
+            }
+        });
     }
 
     /**

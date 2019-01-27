@@ -28,7 +28,6 @@ class seen extends Model
     public $fillable = [
         'user_id',
         'task_id',
-        'notif_id',
         'seen'
     ];
 
@@ -40,7 +39,6 @@ class seen extends Model
     protected $casts = [
         'user_id' => 'integer',
         'task_id' => 'integer',
-        'notif_id' => 'integer',
         'seen' => 'integer'
     ];
 
@@ -54,4 +52,9 @@ class seen extends Model
     ];
 
     
+        public function notifs()
+    {
+        return $this->hasMany('App\Model\notif');
+    }
+
 }

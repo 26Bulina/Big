@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\tipconcediu;
 
 class periodcoController extends AppBaseController
 {
@@ -43,7 +44,8 @@ class periodcoController extends AppBaseController
      */
     public function create()
     {
-        return view('periodcos.create');
+        $tipconcedius = Tipconcediu::pluck('name','id');
+        return view('periodcos.create',compact('tipconcedius'));
     }
 
     /**
@@ -93,6 +95,7 @@ class periodcoController extends AppBaseController
      */
     public function edit($id)
     {
+        $tipconcedius = Tipconcediu::pluck('name','id');
         $periodco = $this->periodcoRepository->findWithoutFail($id);
 
         if (empty($periodco)) {
@@ -101,7 +104,7 @@ class periodcoController extends AppBaseController
             return redirect(route('periodcos.index'));
         }
 
-        return view('periodcos.edit')->with('periodco', $periodco);
+        return view('periodcos.edit',compact('periodco','tipconcedius'));
     }
 
     /**

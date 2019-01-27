@@ -1,4 +1,12 @@
 @auth
+
+ <div class="container"  align="center">
+                {{-- {{ $tasks->links("pagination::bootstrap-4")}} --}}
+                {{ $tasks->
+                    {{-- appends(['s' => $s])-> --}}
+                    links("pagination::bootstrap-4")}}
+        </div>
+
 <table class="table table-responsive" id="tasks-table">
     <thead>
         <tr>
@@ -9,6 +17,7 @@
             <th>Status</th>
             <th>Priority</th>
             <th>Repository</th>
+            <th>departament</th>
             <th>Fisier/attach</th>
             <th colspan="3">Action</th>
         </tr>
@@ -23,10 +32,11 @@
             <td>{!! $task->body !!}</td>
             <td>{!! $task->p_create->name !!}</td>
             <td>{!! $task->p_assign->name !!}</td>
-            <td>{!! $task->status->name !!}</td> {{-- status->name  hasMany in Model--}}
-            <td>{!! $task->priority->name !!}</td>
-            <td>{!! $task->repository->name !!}</td>
-            <td>{!! $task->fisier !!}</td>
+            <td>{!! $task->status->name or ' ' !!}</td> {{-- status->name  hasMany in Model--}}
+            <td>{!! $task->priority->name or ' ' !!}</td>
+            <td>{!! $task->repository->name or ' ' !!}</td>
+            <td>{!! $task->departament['name'] !!}</td>
+            <td>{!! $task->fisier or ' ' !!}</td>
             <td>
                 {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
@@ -42,9 +52,10 @@
 </table>
 
        <div class="container"  align="center">
-                {{-- {{ $tasks -> links() }}  --}}
-                {{-- {{ $tasks->links('partials.paginator') }} --}}
-                {{ $tasks->links("pagination::bootstrap-4")}}
+                {{-- {{ $tasks->links("pagination::bootstrap-4")}} --}}
+                {{ $tasks->
+                    {{-- appends(['s' => $s])-> --}}
+                    links("pagination::bootstrap-4")}}
         </div>
 @endauth 
 

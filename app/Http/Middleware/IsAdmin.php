@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Auth;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
 {
@@ -26,5 +26,11 @@ class IsAdmin
             return redirect()->route('user');
         }
         return $next($request);
+
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect('/home');
+        // }
     }
+
+
 }
