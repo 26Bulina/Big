@@ -4,6 +4,10 @@ use DB;
 use Flash;
 use Response;
 use Auth;
+// use App\Charts\SampleChart;
+// use ConsoleTVs\Charts\Charts;
+// use ConsoleTVs\Charts\Facades\Charts;
+// use Charts;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Http\Requests\CreatetaskRequest;
 use App\Http\Requests\UpdatetaskRequest;
@@ -30,6 +34,46 @@ class taskController extends AppBaseController
     {
         $this->taskRepository = $taskRepo;
     }
+
+    // public function gogo ()
+    // // (Request $request)
+    // { 
+
+    //     $t = DB::select(DB::raw('select * from tasks'));
+    //     // $chart = new SampleChart;
+    //     $c = Charts::create($t, 'bar','highcharts')
+    //                     -> title('bete task-uri')
+    //                     ->elementLabel("Product Details")
+    //                     ->dimensions(1000,500)
+    //                     ->responsive(false)
+    //                     ->groupByMonth(date('Y'), true);
+
+    //     // dd($chart);
+    //        $erik = Charts::create('pie','highcharts')
+    //                     -> setTitle('Placintuta')
+    //                     -> setElementLabel("Product Details")
+    //                     ->setLabels(['p1','p2','p3'])
+    //                     ->setValues(['10','45','45'])
+    //                     ->dimensions(1000,500)
+    //                     ->responsive(true);         
+
+    //         $pie_chart = Charts::create('pie','highcharts')
+    //                     -> title('Placintuta')
+    //                     ->labels(['p1','p2','p3'])
+    //                     ->values(['10','45','45'])
+    //                     ->dimensions(1000,500)
+    //                     ->responsive(true);
+    //         // return view('tasks', compact('pie_chart'));
+    //         return view('tasks', compact('erik'));
+    //         // return view ('tasks.index', ['erik' => $erik]);
+    // }
+
+
+
+
+
+
+
 
     /**
      * Display a listing of the task.
@@ -171,6 +215,7 @@ class taskController extends AppBaseController
                      ->join('departaments as d', 'd.id', '=', 'j.departament_id')
                      ->whereNotIn('t.pers_assign',$x)
                      ->where('t.departament_id','=',$request->get('departament_id'))
+                     // -> where(t.status_id,<>,3) -> where(t.status_id,<>,4)
                      ->groupBy('pers_assign')
                      ->groupBy('t_dep')
                      ->orderBy('nr_tsk', 'asc')

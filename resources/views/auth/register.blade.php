@@ -25,16 +25,15 @@
                         </div>
 
                         <!-- admin Field -->
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">{!! Form::label('admin', 'admin:') !!}</label>
-                        <div class="col-md-6">
-                            <label class="checkbox-inline">
-                            {{-- {!! Form::hidden('admin', false) !!} --}}
-                                {!! Form::checkbox('admin', '0', false) !!}
-                            </label>
-  
-                        </div>
-                        </div>
+                            <div class="col-md-6">
+                                <label class="checkbox-inline">
+                                    {!! Form::checkbox('admin', '0', false) !!}
+                                </label>
+      
+                            </div>
+                        </div> --}}
 
 
                         <!-- employee_id Field -->

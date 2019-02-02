@@ -1,11 +1,14 @@
-@auth
+{{-- @auth --}}
 
  <div class="container"  align="center">
                 {{-- {{ $tasks->links("pagination::bootstrap-4")}} --}}
                 {{ $tasks->
                     {{-- appends(['s' => $s])-> --}}
                     links("pagination::bootstrap-4")}}
-        </div>
+ </div>
+
+
+        {{-- {!! $erik->render() !!} --}}
 
 <table class="table table-responsive" id="tasks-table">
     <thead>
@@ -36,7 +39,9 @@
             <td>{!! $task->priority->name or ' ' !!}</td>
             <td>{!! $task->repository->name or ' ' !!}</td>
             <td>{!! $task->departament['name'] !!}</td>
-            <td>{!! $task->fisier or ' ' !!}</td>
+            {{-- <td>{!! $task->fisier  !!}</td> --}}
+            <td> <img src="{!! $task->fisier  !!}" alt="{!! $task->fisier  !!}" 
+                class="img-responsive" width="150" height="150"></td>
             <td>
                 {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
@@ -57,8 +62,6 @@
                     {{-- appends(['s' => $s])-> --}}
                     links("pagination::bootstrap-4")}}
         </div>
-@endauth 
+{{-- @endauth  --}}
 
-     @guest
-        <div><h1>    Sorry bro, nu esti logat </h1></div>
-     @endguest
+    

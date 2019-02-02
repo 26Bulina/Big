@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="card">
@@ -37,9 +39,36 @@
             </tr>
             @endforeach
           </tbody>
+
+
         </table>
+
       </div>
     </div>
+
   </div>
+
+
+
+ <div class="row justify-content-center">
+
+
+
+    <table>
+    @foreach($repositories as $repository)
+        <tr>
+            <td>{!! $repository->name !!}</td>
+        </tr>
+    @endforeach
+  </table>
+
+
+
+
 </div>
+
+
+
+</div>
+
 @endsection

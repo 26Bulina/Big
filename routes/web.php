@@ -8,7 +8,24 @@ Route::get('/ideas', function () {
     return view('ideas');
 });
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+// chart
+// Route::get('diagram', 'TaskController@gogo')
+// ->name('task.gogo')
+; // diagrama task
+
+// csv
+Route::get('/csv', function () {
+    return  Excel::download(new App\Exports\TasksExport, 'tasks.xlsx'); // all tasks.
+});
+
+Route::get('/csv1', function () {
+	$users = \App\User::get(); // All users
+	$csvExporter = new \Laracsv\Export();
+	$csvExporter->build($users, ['email', 'name']) // si alte chestii
+				->download();
 });
 
 
@@ -35,17 +52,15 @@ Route::resource('comments', 'commentController');
 Route::post('/tasks/{task}/comments','commentController@store');
 
 
-
-
-
 Route::resource('remembers', 'RememberController');
 Route::resource('todoLists', 'todolistController');
 Route::resource('periodcos', 'periodcoController');
 Route::resource('notifs', 'notifController');
 
 
-
 Route::resource('employees', 'EmployeeController');
+
+
 Route::resource('jobs', 'JobController');
 Route::resource('tipconcedius', 'tipconcediuController');
 Route::resource('departaments', 'departamentController');
@@ -84,46 +99,33 @@ Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('ver
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+
 
 Route::group(['middleware' => ['auth']] , function(){
 	Route::get('/', function () {
-		// $u = App\User::get();
-		// \Debugar::info($u);
-    	return view('welcome');
+				// $u = App\User::get();
+				// \Debugar::info($u);
+    	return view('home');
 	});
 
-	Route::get('/home',function(){
+	// Route::get('home', 'repositoryController@showmeniu')->name('user');
+	Route::get('home',function(){
 			return view('home');
 	})->name('user'); // controller 
 
-	// admin 
 
+
+	// admin 
 	Route::group(['middleware' => ['isAdmin']] , function(){
-		// Registration Routes...
-		Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-		Route::post('register', 'Auth\RegisterController@register');
 		Route::get('/admin', function(){
+    			$repositories['repositories'] = App\Models\repository::all();  
 				$users['users'] = \App\User::all();
-				return view('adminhome',$users);
+				return view('adminhome',$users, $repositories);
 		});
 	});
 
 });
 
- // ?????????????
-// Route::resources([
-//     'photos' => 'PhotoController',
-//     'posts' => 'PostController'
-// ]);
-
-
-
-
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::resource('items', 'ItemController');
-
-// Route::resource('notifications', 'NotificationController');
-
-// Route::resource('departamentHas', 'departamenthasController');

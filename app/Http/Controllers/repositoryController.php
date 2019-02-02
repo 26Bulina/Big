@@ -21,6 +21,13 @@ class repositoryController extends AppBaseController
         $this->repositoryRepository = $repositoryRepo;
     }
 
+
+    public function showmeniu()
+    {
+        $repositories['repositories'] = App\Models\repository::all();
+
+        return view('menu', compact( $repositories));
+    }
     /**
      * Display a listing of the repository.
      *
@@ -73,15 +80,16 @@ class repositoryController extends AppBaseController
      */
     public function show($id)
     {
-        $repository = $this->repositoryRepository->findWithoutFail($id);
 
+        $repository = $this->repositoryRepository->findWithoutFail($id);
+// dd($repository);
         if (empty($repository)) {
             Flash::error('Repository not found');
 
             return redirect(route('repositories.index'));
         }
 
-        return view('repositories.show')->with('repository', $repository);
+        return view('repositories.show',compact('repository'));
     }
 
     /**

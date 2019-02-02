@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@auth
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
@@ -34,4 +35,10 @@
         </div>
     </div>
 </div>
+@endauth
+ @guest
+        <div class=" row justify-content-center col-md-offset-2 col-md-6">
+            <h3>    Pentru a vedea aceasta pagina trebuie sa va autentificati. </h3>
+        </div>
+ @endguest
 @endsection

@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Name</th>
-        <th>Description</th>
+            <th>Description</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -10,6 +10,8 @@
     @foreach($repositories as $repository)
         <tr>
             <td>{!! $repository->name !!}</td>
+<td><a href="{!! route('repositories.show', [$repository->id]) !!}" >{!! $repository->name !!}</a></td>
+            
             <td>{!! $repository->description !!}</td>
             <td>
                 {!! Form::open(['route' => ['repositories.destroy', $repository->id], 'method' => 'delete']) !!}

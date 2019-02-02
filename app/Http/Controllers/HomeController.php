@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\task;
+use App\Models\repository;
 
 class HomeController extends Controller
 {

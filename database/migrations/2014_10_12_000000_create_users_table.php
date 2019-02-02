@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
-            $table->integer('admin', false, true)->default(false);
+            $table->integer('admin')->default('0');
             //$table->boolean('admin')->default(0);
             $table->integer('employee_id')->unsigned()->unique();
             $table->foreign('employee_id')->references('id')->on('employees');
