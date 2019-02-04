@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="card">
@@ -20,6 +22,8 @@
               <th>nume membru</th>
               <th>mail</th>
               <th>id</th>
+              <th>admin</th>
+              <th>employee_id</th>
             </tr>
           </thead>
           <?php $key=0; ?>
@@ -30,12 +34,41 @@
               <td>{{ $value->name }}</td>
               <td>{{ $value->email }}</td>
               <td>{{ $value->id }}</td>
+              <td>{{ $value->admin }}</td>
+              <td>{{ $value->employee_id }}</td>
             </tr>
             @endforeach
           </tbody>
+
+
         </table>
+
       </div>
     </div>
+
   </div>
+
+
+
+ <div class="row justify-content-center">
+
+
+
+    <table>
+    @foreach($repositories as $repository)
+        <tr>
+            <td>{!! $repository->name !!}</td>
+        </tr>
+    @endforeach
+  </table>
+
+
+
+
 </div>
+
+
+
+</div>
+
 @endsection

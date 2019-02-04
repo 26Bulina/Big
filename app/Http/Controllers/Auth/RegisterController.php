@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use DB;
 use App\User;
+use App\Models\employee;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -37,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
     /**
@@ -51,7 +52,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:5|confirmed',
+            'employee_id' => 'required|unique:users'
         ]);
     }
 
@@ -61,12 +63,28 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
+
+
     protected function create(array $data)
     {
+        // collect([1, 2, 3])->all();
+        $eid=$data['employee_id'];
+        $a = DB::table('employees')
+                     ->select(DB::raw( 'admin'))
+                     ->where('id',$eid)
+                     ->first();
+        // $data->put('admin',$a->admin);             
+        // dd($a->admin);
+        // dd($data[0]->toArray());
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
+            'employee_id' => $data['employee_id']
+        
+        ], compact (''));
+        
     }
+
 }

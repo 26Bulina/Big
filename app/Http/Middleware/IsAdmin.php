@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
 {
@@ -13,11 +14,23 @@ class IsAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard=null)
     {
-        if (auth()->check() && $request->user()->admin() == 0) {
-            return redirect()->guest('home');
+        // if (auth()->check() && $request->user()->admin() == 0) {
+        //     return redirect()->guest('home');
+        // }
+        // return $next($request);
+
+
+        if (Auth::guard($guard)->check() && Auth::user()->admin == 0) {
+            return redirect()->route('user');
         }
         return $next($request);
+
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect('/home');
+        // }
     }
+
+
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\task;
+use App\Models\repository;
 
 class HomeController extends Controller
 {
@@ -21,6 +23,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function count($x)
+    {
+        $x = DB::table($x)->count();
+    }
+
     public function index()
     {
         return view('home');
