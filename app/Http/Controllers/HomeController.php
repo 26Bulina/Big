@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\task;
 use App\Models\repository;
+use App\Models\departament;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,36 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        $departamentes = departament::with('tasks')->get();
+        $tasks = task::latest()
+                        ->paginate(3)
+                        ;
+        return view('home',compact('departamentes','tasks'));
+        // return view('home');
     }
+
+     public function departament($id)
+    {
+        $departamentes = departament::with('tasks')->get();
+        $tasks = task::latest()
+                        ->where('departament_id',$id)
+                        ->paginate(3)
+                        ;
+
+        return view('home',compact('departamentes','tasks'));
+        // return view('home');
+    }
+
+
+    public function app()
+    {
+
+        // $departamentes = departament::all();
+        // dd($departamentes);
+        // return view('layouts/app',compact('departamentes'));
+        return view('layouts/app');
+    }
+
+
+
 }

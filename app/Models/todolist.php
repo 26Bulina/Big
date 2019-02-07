@@ -36,9 +36,7 @@ class todolist extends Model
      * @var array
      */
     protected $casts = [
-        'user_id' => 'integer',
-        'note_name' => 'string',
-        'done' => 'integer'
+        'note_name' => 'string'
     ];
 
     /**
@@ -47,7 +45,6 @@ class todolist extends Model
      * @var array
      */
     public static $rules = [
-        'user_id' => 'number',
         'note_name' => 'required'
     ];
 

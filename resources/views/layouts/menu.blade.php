@@ -4,21 +4,29 @@
         <li class="nav-item">
           <a class="nav-link active" data-toggle="tab" href="#tab1">Menu</a>
         </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#tab2">all</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#tab3">fa-fa</a>
-    </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab2">all</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab3">fa-fa</a>
+        </li>
   </ul>
   <!-- continut submeniuri -->
   <div class="tab-content">
 
-
-
-
-
-
+  {{-- select 
+              d.name departament, u.name username,  
+              e.first_name nume, e.last_name prenume, 
+              j.name functie, 
+              boss.first_name superior, boss.last_name superior , js.name functie_superior
+                 from employees e
+                    left join employees boss on boss.id=e.superior_id
+                    left join users u on u.employee_id=e.id
+                    left join jobs j on j.id=e.job
+                    left join jobs js on js.id=boss.job
+                    left join departaments d on d.id=j.departament_id
+                    where e.end_date is null or e.end_date>'2019-02-04'
+                    ; --}}
 
 
     <!-- tab 1  -->
@@ -67,9 +75,7 @@
             <span class="badge badge-primary" style="background: #D67FFFFF; position:relative;">
               {{ App\Models\task::all()->count() }} </span> 
             </a>
-            {{--  <div class="panel-body">
-              <a class="padd list-group-item" href="{!! route('diverse') !!}" >Tasks me</a>
-            </div> --}}
+
             
         </div>
 

@@ -3,7 +3,7 @@
  <div class="container"  align="center">
                 {{-- {{ $tasks->links("pagination::bootstrap-4")}} --}}
                 {{ $tasks->
-                     appends(['s' => $s])->
+                  //   appends(['s' => $s])->
                     links("pagination::bootstrap-4")}}
  </div>
 
@@ -56,7 +56,7 @@
        <div class="container"  align="center">
                 {{-- {{ $tasks->links("pagination::bootstrap-4")}} --}}
                 {{ $tasks->
-                    appends(['s' => $s])->
+                  //  appends(['s' => $s])->
                     links("pagination::bootstrap-4")}}
         </div>
 {{-- @endauth  --}}

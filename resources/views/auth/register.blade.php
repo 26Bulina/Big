@@ -36,10 +36,8 @@
                         </div> --}}
 
 
-                        <!-- employee_id Field -->
-
-                     
-                        <?php
+       <!-- employee_id Field -->           
+         <?php
         $taked = App\User::select(DB::raw('employee_id'))->get();
                 
         use App\Models\Employee;

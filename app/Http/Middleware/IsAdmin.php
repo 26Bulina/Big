@@ -22,8 +22,10 @@ class IsAdmin
         // return $next($request);
 
 
-        if (Auth::guard($guard)->check() && Auth::user()->admin == 0) {
-            return redirect()->route('user');
+        if (Auth::guard($guard)->check() ){
+            if (Auth::user()->admin == 0) {
+                return redirect()->route('user');
+            }
         }
         return $next($request);
 

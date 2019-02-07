@@ -8,8 +8,20 @@ use App\Repositories\todolistRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use App\Models\todoLists;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+
+use App\User;
+use App\Models;
+use App\Models\repository;
+use App\Models\status;
+use App\Models\priority;
+use App\Models\task;
+use App\Models\comment;
+use App\Models\departament;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
 
 class todolistController extends AppBaseController
 {
@@ -55,10 +67,15 @@ class todolistController extends AppBaseController
      */
     public function store(CreatetodolistRequest $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
+        // $todoList = $this->todoListRepository->create($input);
 
-        $todoList = $this->todoListRepository->create($input);
 
+        $todoList = new todoList;
+        $todoList->pers_create = Auth::user()->id;
+        $todoList->note_name = Input::get("note_name");
+        $todoList->done = Input::get("done");
+        $todoList->save();
         Flash::success('Todo List saved successfully.');
 
         return redirect(route('todoLists.index'));
