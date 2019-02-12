@@ -62,5 +62,15 @@ public function user()
     return $this->belongsTo('App\User','user_id');
 }
 
-    
+   
+public function scopeSearch ($query, $s)
+    {
+    return $query
+                 ->where('user_id','like','%'. $s. '%')
+                 ->orWhere('tipconcediu_id','like','%'. $s. '%');
+    }
+
+
+
+
 }

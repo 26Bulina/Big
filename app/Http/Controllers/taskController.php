@@ -25,6 +25,7 @@ use App\Models\watcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class taskController extends AppBaseController
 {
@@ -118,13 +119,8 @@ public function user_dep($user_dep, $uid) {
         $s = $request->input('s');
         $p_assign = $task->p_assign['name'];
         $p_create = $task->p_create['name'];
-        // $tasks = Task::with('departament')
-        //         ->latest()
-        //         ->search ($s)
-        //         ->paginate(10)
-        //         ;
+
     //    ---------repository-----------------------------------------------------
-   $s = $request->input('s');
         $uid = Auth::user()->id;
         $repositories = DB::table('repositories as r')
              ->select(DB::raw( ' r.id id, r.name as name '))
@@ -135,12 +131,20 @@ public function user_dep($user_dep, $uid) {
              ->where('u.id','=',$uid)
              ->get();    
 $request->get('repo_id');
-// dd($this -> $request);
-        // $tasks = task::latest()
-        //                 ->where('repository_id',$request->get('repo_id'))
-        //                 ->search ($s)
-        //                 ->paginate(3)
-        //                 ;
+
+$tasks_created = task::latest()
+                 ->where('pers_create',Auth::user()->id)
+                 ->search ($s)
+                 ->paginate(5);
+$tasks_assigned = task::latest()
+                 ->where('pers_assign',Auth::user()->id)
+                 ->search ($s)
+                 ->paginate(5);
+$tasks_w = task::join('watchers as w', 'w.task_id', '=', 'tasks.id')
+                 ->where('w.user_id',Auth::user()->id )
+                 ->search ($s)
+                 ->paginate(5);
+
      //    -----------------------------departament----------------------------------------
   $s = $request->input('s');
         $uid = Auth::user()->id;
@@ -156,17 +160,12 @@ $request->get('repo_id');
         $departamentes = departament::with('tasks')
                     // ->select(DB::raw('id'))
                     ->where('id',$user_dep->did)->get();
-// dd($departamentes);
-        // $tasks = task::latest()
-        //                 ->where('departament_id',$departamentes[0]->id)
-        //                 ->search ($s)
-        //                 ->paginate(3)
-        //                 ;
- // dd($tasks);
+
      //    ---------------------------------------------------------------------
         return view('tasks.index',
-               compact('departamentes','repositories','tasks','s', task::paginate(10)
-         ));
+               compact('departamentes','repositories','tasks_created','tasks_assigned',
+                        'tasks_w','s'
+                 ));
     }
 
 
@@ -367,17 +366,20 @@ $request->get('repo_id');
                     ->join('tasks as t', 'd.id', '=', 't.departament_id')
                     ->where('t.id',$id)
                     ->get();
+        $task = $this->taskRepository->findWithoutFail($id);
         $x=[];
         foreach($us_dep_task as $u){
             $x[]=$u->uid;
         }
-        $users = User::pluck('name','id');
-        $task = $this->taskRepository->findWithoutFail($id);
+        $users = User::whereNotIn('users.id',$x)
+            ->whereNotIn('users.id',[$task->pers_create])
+            ->pluck('name','id');
+        
         // dd($x);
         $watchers = watcher::with('user')->with('task')
                     ->where('task_id',$id)
-                    ->whereNotIn('user_id',[$task->pers_create])
-                    ->whereNotIn('user_id',$x)
+                    // ->whereNotIn('user_id',[$task->pers_create])
+                    // ->whereNotIn('user_id',$x)
                     ->get();
         // dd($watchers) ;
         if (empty($task)) {
@@ -433,8 +435,8 @@ $request->get('repo_id');
 
         $task = $this->taskRepository->update($request->all(), $id);
         Flash::success('Task-ul a fost salvat cu succes');
-
-        return redirect(route('tasks.show',compact('task')));
+        // return Redirect::back()->with('task', $task);
+        return redirect(route('tasks.index',compact('task')));
     }
 
 

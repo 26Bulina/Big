@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\zileco;
 use App\User;
 use App\Models\tipconcediu;
 
@@ -32,11 +33,15 @@ class zilecoController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->zilecoRepository->pushCriteria(new RequestCriteria($request));
-        $zilecos = $this->zilecoRepository->all();
+        // $this->zilecoRepository->pushCriteria(new RequestCriteria($request));
+        // $zilecos = $this->zilecoRepository->all();
+        $s = $request->input('s');
+        $zilecos = zileco::latest()
+                 ->search ($s)
+                 ->paginate(15);
+        
 
-        return view('zilecos.index')
-            ->with('zilecos', $zilecos);
+        return view('zilecos.index',compact('s','zilecos'));
     }
 
     /**

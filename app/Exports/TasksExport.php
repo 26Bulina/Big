@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\task;
+use App\Models\employee;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class TasksExport implements FromCollection
@@ -12,12 +13,13 @@ class TasksExport implements FromCollection
     */
     public function collection()
     {
-        return task::all();
+        // return task::all();
+        return employee::all();
     }
 
 
      public function export() 
     {
-        return Excel::download(new TasksExport, 'tasks.xlsx');
+        return Excel::download(new TasksExport, 'employees.xlsx');
     }
 }

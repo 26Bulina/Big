@@ -43,6 +43,19 @@ class EmployeeController extends AppBaseController
             'personal_email' => 'string|email|max:255|unique',
         ]);
     }
+   /**
+     * coleg profile
+     *
+     */
+public function profil (Request $request) { 
+    $x=$request->user;
+    $users = User::with('employee')->where('id', $request->user)->get();
+    
+    $profil = Employee::with('jobb')->with('user')->where('id', $users[0]->employee_id)->get();
+    $fct = job::with('employees')->where('id',$profil[0]->job)->get();
+    // dd($profil);
+    return view('profil_coleg',compact('x','profil','fct','users'));
+}
 
     /**
      * User profile

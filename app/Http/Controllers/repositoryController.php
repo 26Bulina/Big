@@ -8,9 +8,12 @@ use App\Repositories\repositoryRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use DB;
+use Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\departament;
+use App\Models\repository;
 
 class repositoryController extends AppBaseController
 {
@@ -37,11 +40,29 @@ class repositoryController extends AppBaseController
      */
     public function index(Request $request)
     {
+         $us_dep_task = DB::table('users as u')
+                    ->select(DB::raw('u.id uid, d.id did'))
+                    ->join('employees as e', 'e.id', '=', 'u.employee_id')
+                    ->join('jobs as j', 'j.id', '=', 'e.job')
+                    ->join('departaments as d', 'd.id', '=', 'j.departament_id')
+                    ->join('tasks as t', 'd.id', '=', 't.departament_id')
+                    ->where('u.id',Auth::user()->id)
+                    ->first();
+            // dd($us_dep_task->did); // departamentul userului logat.
         $this->repositoryRepository->pushCriteria(new RequestCriteria($request));
-        $repositories = $this->repositoryRepository->all();
 
-        return view('repositories.index')
-            ->with('repositories', $repositories);
+        // $departamentes = departament::with('tasks')
+        //             // ->select(DB::raw('id'))
+        //             ->where('id',$user_dep->did)->get();
+$repositories = repository::join('departaments as d', 'd.id', '=', 'repositories.departament_id')
+                ->select(DB::raw('d.id did,repositories.*'))
+                ->where('d.id',$us_dep_task->did)
+                ->get();
+         // dd($repositories);
+        // $repositories = $this->repositoryRepository->all();
+
+        return view('repositories.index',compact('repositories'));
+
     }
 
     /**
@@ -51,7 +72,17 @@ class repositoryController extends AppBaseController
      */
     public function create()
     {
-        $departamentes = departament::pluck('name','id');
+        $us_dep_task = DB::table('users as u')
+                    ->select(DB::raw('u.id uid, d.id did'))
+                    ->join('employees as e', 'e.id', '=', 'u.employee_id')
+                    ->join('jobs as j', 'j.id', '=', 'e.job')
+                    ->join('departaments as d', 'd.id', '=', 'j.departament_id')
+                    ->join('tasks as t', 'd.id', '=', 't.departament_id')
+                    ->where('u.id',Auth::user()->id)
+                    ->first();
+            // dd($us_dep_task->did); // departamentul userului logat.
+        $departamentes = departament::where('departaments.id',$us_dep_task->did)
+                        ->pluck('name','id');
         return view('repositories.create',compact('departamentes'));
     }
 

@@ -59,7 +59,7 @@ class tipconcediuController extends AppBaseController
 
         $tipconcediu = $this->tipconcediuRepository->create($input);
 
-        Flash::success('Tipconcediu saved successfully.');
+        Flash::success('Tipul de concediu a fost salvat.');
 
         return redirect(route('tipconcedius.index'));
     }
@@ -76,7 +76,7 @@ class tipconcediuController extends AppBaseController
         $tipconcediu = $this->tipconcediuRepository->findWithoutFail($id);
 
         if (empty($tipconcediu)) {
-            Flash::error('Tipconcediu not found');
+            Flash::error('Tipul de concediu nu a fost gasit.');
 
             return redirect(route('tipconcedius.index'));
         }
@@ -96,7 +96,7 @@ class tipconcediuController extends AppBaseController
         $tipconcediu = $this->tipconcediuRepository->findWithoutFail($id);
 
         if (empty($tipconcediu)) {
-            Flash::error('Tipconcediu not found');
+            Flash::error('Tipul de concediu nu a fost gasit.');
 
             return redirect(route('tipconcedius.index'));
         }
@@ -117,14 +117,14 @@ class tipconcediuController extends AppBaseController
         $tipconcediu = $this->tipconcediuRepository->findWithoutFail($id);
 
         if (empty($tipconcediu)) {
-            Flash::error('Tipconcediu not found');
+            Flash::error('Tipul de concediu nu a fost gasit.');
 
             return redirect(route('tipconcedius.index'));
         }
 
         $tipconcediu = $this->tipconcediuRepository->update($request->all(), $id);
 
-        Flash::success('Tipconcediu updated successfully.');
+        Flash::success('Tipul de concediu a fost modificat.');
 
         return redirect(route('tipconcedius.index'));
     }
@@ -141,14 +141,14 @@ class tipconcediuController extends AppBaseController
         $tipconcediu = $this->tipconcediuRepository->findWithoutFail($id);
 
         if (empty($tipconcediu)) {
-            Flash::error('Tipconcediu not found');
+            Flash::error('Tipul de concediu nu a fost gasit.');
 
             return redirect(route('tipconcedius.index'));
         }
 
         $this->tipconcediuRepository->delete($id);
 
-        Flash::success('Tipconcediu deleted successfully.');
+        Flash::success('Tipul de concediu a fost sters.');
 
         return redirect(route('tipconcedius.index'));
     }

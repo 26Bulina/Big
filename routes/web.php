@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth']] , function(){
 				$text = 'Nu sunteti autorizat sa accesati acest meniu.';
 				return $text;   })-> name('user');
 		Route::get('/csv', function () {
-		    return  Excel::download(new App\Exports\TasksExport, 'tasks.xlsx'); // all tasks.
+		    return  Excel::download(new App\Exports\TasksExport, 'employees.xlsx'); // all tasks.
 		});
 		Route::get('/', 'homeController@index')->name('home');
 		Route::get('/app', 'homeController@app')->name('app');
@@ -72,6 +72,12 @@ Route::group(['middleware' => ['auth']] , function(){
 		Route::get('/departament/{dep}','taskController@departament')->name('departament');
 		Route::get('/repository/{repo}','taskController@repository')->name('repository');
 		// Route::get('/watchers/{watcher}','watcherController@destroy')->name('delw');
+
+		Route::get('/profil/{user}', 'EmployeeController@profil')->name('informatii');
+
+
+
+
 	// admin 
 	Route::group(['middleware' => ['isAdmin']] , function(){
 		Route::resource('jobs', 'JobController');
