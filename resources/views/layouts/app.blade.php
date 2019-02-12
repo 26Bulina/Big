@@ -8,15 +8,20 @@
         <title>{{ config('app.name') }}</title>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+ {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" /> --}}
+{{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> --}}
+
 
       {{-- link-uri --}}
         {{-- {!! Charts::assets() !!} --}}
         <!-- Fonts -->
         {{-- <link rel="dns-prefetch" href="https://fonts.gstatic.com"> --}}
         {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> --}}
-        {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> --}}
+
         {{-- <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet"> --}}
         {{-- <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"> --}}
         {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> --}}
@@ -28,7 +33,9 @@
 
     </head>
     
-    <body>
+    <body 
+    /*style="background-image: linear-gradient(#3573BE58, #FFFFFFFF ) "*/
+    >
         @include('layouts/onav')
         <div class="container-fluid">
             {{-- <div class="row justify-content-center "> --}}
@@ -42,7 +49,7 @@
                             aria-label="{{ __('Toggle navigation') }}">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                    <div class="collapse navbar-collapse" id="mm">
+                    <div class="collapse navbar-collapse" id="mm" >
                             <div class="padd list-group   ">
                                 @auth
                                 @include('layouts/menu')
@@ -52,7 +59,7 @@
                 </nav>
                 </div>
                 <div class="col-9">
-                            <div class="panel panel-fluid">
+                            {{-- <div class="panel panel-fluid"> --}}
                                 <main >
                                     {{-- <img src="{{url('/storage/app/public/logo3.jpg')}}">
                                     <img src="{{ URL::to('/storage/app/logo3.jpg') }}">
@@ -60,12 +67,12 @@
                                     {{ asset('/storage/app/logo3.jpg') }} --}}
                                     @yield('content')
                                 </main>
-                            </div>
+                            {{-- </div> --}}
                 </div>
             </div>
         </div>
       <!-- Footer -->
-      <footer class="footer">
+      <footer class="footer" >
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
           </div>

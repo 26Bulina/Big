@@ -62,11 +62,16 @@ Route::group(['middleware' => ['auth']] , function(){
 		Route::get('/', 'homeController@index')->name('home');
 		Route::get('/app', 'homeController@app')->name('app');
 		Route::get('profile', 'EmployeeController@profile')->name('profile');
+		
+		Route::post('/tasks/{task}/comments','commentController@store')->name('comm');
+		Route::post('/tasks/{task}','watcherController@store')->name('watch');
 		Route::resource('tasks', 'taskController');
 		Route::get ('/search', 'taskController@search');
-		Route::post('/tasks/{task}/comments','commentController@store')->name('comm');
+
 		Route::resource('comments', 'commentController');
 		Route::get('/departament/{dep}','taskController@departament')->name('departament');
+		Route::get('/repository/{repo}','taskController@repository')->name('repository');
+		// Route::get('/watchers/{watcher}','watcherController@destroy')->name('delw');
 	// admin 
 	Route::group(['middleware' => ['isAdmin']] , function(){
 		Route::resource('jobs', 'JobController');

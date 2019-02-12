@@ -5,10 +5,10 @@
 </div>
 
 <!-- User Id Field -->
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('user_id', 'User Id:') !!}
     <p>{!! $notif->user_id !!}</p>
-</div>
+</div> --}}
 
 <!-- Title Field -->
 <div class="form-group">

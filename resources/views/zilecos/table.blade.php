@@ -10,16 +10,29 @@
     <tbody>
     @foreach($zilecos as $zileco)
         <tr>
-            <td>{!! $zileco->user_id !!}</td>
-            <td>{!! $zileco->tipconcediu_id !!}</td>
+            <td>{!! $zileco->user->name or ' ' !!}</td>
+            <td>{!! $zileco->tipconcediu->name or ' ' !!}</td>
             <td>{!! $zileco->nr_zile !!}</td>
             <td>
+                
+
                 {!! Form::open(['route' => ['zilecos.destroy', $zileco->id], 'method' => 'delete']) !!}
-                <div class='btn-group'>
-                    <a href="{!! route('zilecos.show', [$zileco->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('zilecos.edit', [$zileco->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                </div>
+                    <a href="{!! route('zilecos.show', [$zileco->id]) !!}" 
+                         data-toggle="tooltip"  title="vizualizeaza" style = "padding: 0.9rem"
+                        class="btn btn-success btn-lg"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('zilecos.edit', [$zileco->id]) !!}"
+                        data-toggle="tooltip"  title="modifica"
+                        style = "padding: 0.9rem"
+                        class='btn btn-warning btn-lg' >
+                        <i class="glyphicon glyphicon-edit"></i></a>
+                
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>',
+                         ['type' => 'submit',
+                         'data-toggle' => 'tooltip',
+                         'title' => 'sterge',
+                         'style' => 'padding: 0.9rem',
+                          'class' => 'btn btn-danger btn-lg',
+                          'onclick' => "return confirm('Esti sigur ca vrei sa stergi?')"]) !!}
                 {!! Form::close() !!}
             </td>
         </tr>

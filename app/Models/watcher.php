@@ -47,13 +47,16 @@ class watcher extends Model
      * @var array
      */
     public static $rules = [
-        'watched' => 'required'
     ];
 
     
 
-        public function user()
+    public function user()
     {
         return $this->belongsTo('App\User');
+    }
+    public function task()
+    {
+        return $this->belongsTo('App\Models\task');
     }
 }

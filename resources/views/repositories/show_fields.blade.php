@@ -16,6 +16,12 @@
     <p>{!! $repository->description !!}</p>
 </div>
 
+<!-- Tip concediu Field -->
+<div class="form-group">
+    {!! Form::label('departament_id', 'departament:') !!}
+    <p>{!! $repository->departament_id !!}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}

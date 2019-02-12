@@ -21,7 +21,8 @@ class repositoryRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'name',
-        'description'
+        'description',
+        'departament_id'
     ];
 
     /**

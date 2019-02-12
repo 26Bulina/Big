@@ -3,9 +3,8 @@
 <div class="container">
 <div class="row justify-content-center">
 <div class="card">
-    <div class="card-header">Dashboard</div>
-    <div class="card-body">
-        @if (session('status'))
+    <div class="card-header">
+           @if (session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
         </div>
@@ -13,7 +12,15 @@
         <div class="alert alert-success" role="alert">
             <p> Bine ai venit, {{ Auth::user()->name }} !</p>
         </div>
-        <table class="table table-responsive" id="tasks-table">
+    </div>
+
+
+
+
+    <div class="card-body">
+     
+
+{{--         <table class="table table-responsive" id="tasks-table">
         <tbody>
             @foreach($departamentes as $dep)
             
@@ -24,8 +31,21 @@
             </a>
               
             @endforeach
-        </tbody>
+              </tbody>
         </table>
+             <table>
+        <tbody>
+            @foreach($repositories as $repo)
+            
+            <a class="padd list-group-item" href="{{ route('repository',$repo->id) }} " >
+             {{ $repo->name}}
+                <span class="badge pull-right badge-primary" style="background: #D67FFFFF; 
+                      position:relative;"> {{ $repo->tasks->count() }}</span>
+            </a>
+              
+            @endforeach
+        </tbody>
+        </table> --}}
 
 
 
@@ -34,14 +54,14 @@
     <thead>
         <tr>
             <th>Subject</th>
-            <th>Body</th>
+            {{-- <th>Body</th> --}}
             <th>Pers Create</th>
             <th>Pers Assign</th>
             <th>Status</th>
             <th>Priority</th>
             <th>Repository</th>
             <th>departament</th>
-            <th>Fisier/attach</th>
+            {{-- <th>Fisier/attach</th> --}}
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -52,7 +72,7 @@
             <td>
                 <a href="{!! route('tasks.show', [$task->id]) !!}" ><i ><code>{!! $task->subject !!}</code></i></a>
             </td>
-            <td>{!! $task->body !!}</td>
+            {{-- <td>{!! $task->body !!}</td> --}}
             <td>{!! $task->p_create->name !!}</td>
             <td>{!! $task->p_assign->name !!}</td>
             <td>{!! $task->status->name or ' ' !!}</td> {{-- status->name  hasMany in Model--}}
@@ -60,8 +80,9 @@
             <td>{!! $task->repository->name or ' ' !!}</td>
             <td>{!! $task->departament['name'] !!}</td>
             {{-- <td>{!! $task->fisier  !!}</td> --}}
-            <td> <img src="{!! $task->fisier  !!}" alt="{!! $task->fisier  !!}" 
-                class="img-responsive" width="150" height="150"></td>
+           {{--  <td> 
+                <img src="{!! $task->fisier  !!}" alt="{!! $task->fisier  !!}" 
+                class="img-responsive" width="150" height="150"></td> --}}
             <td>
                 {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

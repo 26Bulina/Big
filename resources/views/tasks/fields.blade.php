@@ -35,10 +35,10 @@
 </div>
 
 <!-- Repository Id Field -->
-<div class="form-group col-sm-6">
+{{-- <div class="form-group col-sm-6">
     {!! Form::label('repository_id', 'Repository Id:') !!}
     {!! Form::select('repository_id', $repositories, null, ['class' => 'form-control']) !!}
-</div>
+</div> --}}
 
 <!-- departament Id Field -->
 <div class="form-group col-sm-6">

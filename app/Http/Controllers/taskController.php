@@ -21,6 +21,7 @@ use App\Models\priority;
 use App\Models\task;
 use App\Models\comment;
 use App\Models\departament;
+use App\Models\watcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
@@ -90,36 +91,58 @@ public function user_dep($user_dep, $uid) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
     public function index(Request $request)
     {   
         $uid = Auth::user()->id;
-
-        // user_dep($uid);
         $user_dep = DB::table('users as u')
-             ->select(DB::raw( 'j.name functie, d.id did, d.name departament'))
+             ->select(DB::raw( 'j.name functie,d.id did, d.name departament'))
              ->join('employees as e', 'e.id', '=', 'u.employee_id')
              ->join('jobs as j', 'j.id', '=', 'e.job')
              ->join('departaments as d', 'd.id', '=', 'j.departament_id')
              ->where('u.id','=',$uid)
-             ->first();    // $user_dep->did , $user_functie->functie
-      
-        $departamentes = departament::with('tasks')->where('id',$user_dep->did)->get(); 
-        $task = task::find(1);
+             ->get();   
+        // $departamentes = departament::with('repositories')
+        //             ->where('id',$user_dep[0]->did)
+        //             ->get(); 
+        $task = task::find(1);              
         $s = $request->input('s');
         $p_assign = $task->p_assign['name'];
         $p_create = $task->p_create['name'];
-
-        $tasks = Task::latest()
-                ->search ($s)
-                ->paginate(10)
-                ;
-        return view('tasks.index',compact('departamentes','tasks','s', task::paginate(10)
-         ));
-    }
-
-    public function departament(Request $request)
-    {
-        $s = $request->input('s');
+        // $tasks = Task::with('departament')
+        //         ->latest()
+        //         ->search ($s)
+        //         ->paginate(10)
+        //         ;
+    //    ---------repository-----------------------------------------------------
+   $s = $request->input('s');
+        $uid = Auth::user()->id;
+        $repositories = DB::table('repositories as r')
+             ->select(DB::raw( ' r.id id, r.name as name '))
+             ->join('departaments as d', 'd.id', '=', 'r.departament_id')
+             ->join('jobs as j', 'j.departament_id', '=', 'd.id')
+             ->join('employees as e', 'e.job', '=', 'j.id')
+             ->join('users as u', 'e.id', '=', 'u.employee_id')
+             ->where('u.id','=',$uid)
+             ->get();    
+$request->get('repo_id');
+// dd($this -> $request);
+        // $tasks = task::latest()
+        //                 ->where('repository_id',$request->get('repo_id'))
+        //                 ->search ($s)
+        //                 ->paginate(3)
+        //                 ;
+     //    -----------------------------departament----------------------------------------
+  $s = $request->input('s');
         $uid = Auth::user()->id;
 // user_dep($uid);
         $user_dep = DB::table('users as u')
@@ -134,6 +157,63 @@ public function user_dep($user_dep, $uid) {
                     // ->select(DB::raw('id'))
                     ->where('id',$user_dep->did)->get();
 // dd($departamentes);
+        // $tasks = task::latest()
+        //                 ->where('departament_id',$departamentes[0]->id)
+        //                 ->search ($s)
+        //                 ->paginate(3)
+        //                 ;
+ // dd($tasks);
+     //    ---------------------------------------------------------------------
+        return view('tasks.index',
+               compact('departamentes','repositories','tasks','s', task::paginate(10)
+         ));
+    }
+
+
+
+
+
+
+
+        public function repository(Request $request, $id)
+    {
+        $s = $request->input('s');
+        $uid = Auth::user()->id;
+        $repositories = DB::table('repositories as r')
+             ->select(DB::raw( ' r.id id, r.name as name '))
+             ->join('departaments as d', 'd.id', '=', 'r.departament_id')
+             ->join('jobs as j', 'j.departament_id', '=', 'd.id')
+             ->join('employees as e', 'e.job', '=', 'j.id')
+             ->join('users as u', 'e.id', '=', 'u.employee_id')
+             ->where('u.id','=',$uid)
+             ->get();    
+$request->get('repo_id');
+// dd($request);
+        $tasks = task::latest()
+                        ->where('repository_id',$request->get('repo_id'))
+                        ->search ($s)
+                        ->paginate(3)
+                        ;
+ // dd($tasks);
+        return view('tasks.index',compact('repositories','tasks'));
+    }
+
+    public function departament(Request $request)
+    {
+        $s = $request->input('s');
+        $uid = Auth::user()->id;
+// user_dep($uid);
+        $user_dep = DB::table('users as u')
+             ->select(DB::raw( 'j.name functie, d.id did, d.name departament'))
+             ->join('employees as e', 'e.id', '=', 'u.employee_id')
+             ->join('jobs as j', 'j.id', '=', 'e.job')
+             ->join('departaments as d', 'd.id', '=', 'j.departament_id')
+             ->where('u.id','=',$uid)
+             ->first();    // $user_dep->did , $user_functie->functie
+        $departamentes = departament::with('tasks')
+                    // ->select(DB::raw('id'))
+                    ->where('id',$user_dep->did)->get();
+// dd($departamentes);
         $tasks = task::latest()
                         ->where('departament_id',$departamentes[0]->id)
                         ->search ($s)
@@ -142,6 +222,39 @@ public function user_dep($user_dep, $uid) {
  // dd($tasks);
         return view('tasks.index',compact('departamentes','tasks'));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function create()
     {
@@ -178,6 +291,16 @@ public function user_dep($user_dep, $uid) {
         $task->departament_id = Input::get("departament_id");
         $task->created_at = Input::get("created_at");
 
+        $first_user_dep = DB::table('users as u')
+             ->select(DB::raw( 'u.id uid, j.name functie,d.id did, d.name departament,r.id rid, r.name repository'))
+             ->join('employees as e', 'e.id', '=', 'u.employee_id')
+             ->join('jobs as j', 'j.id', '=', 'e.job')
+             ->join('departaments as d', 'd.id', '=', 'j.departament_id')
+             ->join ('repositories as r', 'd.id', '=', 'r.departament_id')
+             ->where('d.id','=',$request->get('departament_id'))
+             ->first(); // alege un singur user din departament
+// dd($user_dep);
+
         $pers_co = DB::table('periodcos as co')
                  ->select(DB::raw( 'co.user_id user'))
                  ->join('users as u', 'u.id', '=', 'co.user_id')
@@ -185,20 +308,22 @@ public function user_dep($user_dep, $uid) {
                  ->where('co.start_date', '<=', date('Y-m-d'))
                  ->where('co.end_date', '>=', date('Y-m-d'))
                  // ->whereBetween('current_date',['co.start_date','co.end_date'])
-                 ->get();
+                 ->get(); // alege persoanele care sunt in concediu in momentul actual
 
                      $x = [];
                      foreach ( $pers_co as $p)
                      {
                         $x[]=$p->user;
                      }
-           // dd ($x);        
+           // dd ($x);  
+      
+
         $nr_task = DB::table('tasks as t')
              ->select(DB::raw( 't.pers_assign ,t.departament_id t_dep, count(t.id) as nr_tsk'))
-             ->join('users as u', 'u.id', '=', 't.pers_assign')
-             ->join('employees as e', 'e.id', '=', 'u.employee_id')
-             ->join('jobs as j', 'j.id', '=', 'e.job')
-             ->join('departaments as d', 'd.id', '=', 'j.departament_id')
+             // ->join('users as u', 'u.id', '=', 't.pers_assign')
+             // ->join('employees as e', 'e.id', '=', 'u.employee_id')
+             // ->join('jobs as j', 'j.id', '=', 'e.job')
+             // ->join('departaments as d', 'd.id', '=', 'j.departament_id')
              ->whereNotIn('t.pers_assign',$x)
              ->where('t.departament_id','=',$request->get('departament_id'))
              // -> where(t.status_id,<>,3) -> where(t.status_id,<>,4)
@@ -206,14 +331,24 @@ public function user_dep($user_dep, $uid) {
              ->groupBy('t_dep')
              ->orderBy('nr_tsk', 'asc')
              // ->take(1) 
-             ->get();               
+             ->get(); // ia persoana fara co si cu cele mai putin tichete din departament
+             $a = count($nr_task);   
 
+
+
+
+                       
+    if ( count($nr_task) >0) {
         $task->pers_assign =  $nr_task[0]->pers_assign;
-
+    } else {
+        $task->pers_assign =  $first_user_dep->uid;
+    }
+ // dd($task->pers_assign); 
         $task->fisier = Input::get("fisier");
         
         $task->updated_at = Input::get("updated_at");
         $task->deleted_at = Input::get("deleted_at");
+
         $task->save();
 
         Flash::success('Task-ul a fost salvat cu succes');
@@ -224,14 +359,33 @@ public function user_dep($user_dep, $uid) {
 
     public function show($id)
     {
+        $us_dep_task = DB::table('users as u')
+                    ->select(DB::raw('u.id uid'))
+                    ->join('employees as e', 'e.id', '=', 'u.employee_id')
+                    ->join('jobs as j', 'j.id', '=', 'e.job')
+                    ->join('departaments as d', 'd.id', '=', 'j.departament_id')
+                    ->join('tasks as t', 'd.id', '=', 't.departament_id')
+                    ->where('t.id',$id)
+                    ->get();
+        $x=[];
+        foreach($us_dep_task as $u){
+            $x[]=$u->uid;
+        }
+        $users = User::pluck('name','id');
         $task = $this->taskRepository->findWithoutFail($id);
-
+        // dd($x);
+        $watchers = watcher::with('user')->with('task')
+                    ->where('task_id',$id)
+                    ->whereNotIn('user_id',[$task->pers_create])
+                    ->whereNotIn('user_id',$x)
+                    ->get();
+        // dd($watchers) ;
         if (empty($task)) {
             Flash::error('Task-ul nu a fost gasit');
 
             return redirect(route('tasks.index'));
         }
-        return view('tasks.show', compact('task'));
+        return view('tasks.show', compact('task','watchers','users'));
     }
 
 
@@ -246,12 +400,12 @@ public function user_dep($user_dep, $uid) {
                  ->pluck('name', 'id'); 
         // $users = User::pluck('name','id');
         // $repositories = Repository::pluck('name','id');
-        $repositories = DB::table('tasks as t')
+        $repositories = DB::table('repositories as r')
                         ->select(DB::raw( 'CONCAT(d.name,": ",r.name) as name,r.id id'))
-                        ->join('departaments as d', 'd.id', '=', 't.departament_id')
-                        ->join('repositories as r', 'r.id', '=', 't.repository_id')
+                        ->join('departaments as d', 'd.id', '=', 'r.departament_id')
                         ->orderBy('d.id')
                         ->pluck('name', 'id');
+
         $priorities = Priority::pluck('name','id');
         $statuses = Status::pluck('name','id');
         $departaments = Departament::pluck('name','id');
@@ -280,7 +434,7 @@ public function user_dep($user_dep, $uid) {
         $task = $this->taskRepository->update($request->all(), $id);
         Flash::success('Task-ul a fost salvat cu succes');
 
-        return redirect(route('tasks.index'));
+        return redirect(route('tasks.show',compact('task')));
     }
 
 
@@ -292,7 +446,7 @@ public function user_dep($user_dep, $uid) {
             return redirect(route('tasks.index'));
         }
         $this->taskRepository->delete($id);
-        Flash::success('Task-ul a fost salvat cu succes');
+        Flash::success('Task-ul a fost sters cu succes');
         return redirect(route('tasks.index'));
     }
 
@@ -312,6 +466,7 @@ public function user_dep($user_dep, $uid) {
               // return redirect(route('tasks.show'))->
               return view('tasks.show')->with('response', 'Comentariul a fost salvat cu succes');
     }
+
 
 
 }

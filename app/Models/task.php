@@ -65,8 +65,8 @@ class task extends Model
      * @var array
      */
     public static $rules = [
-        'subject' => 'required',
-        'body' => 'required',
+        // 'subject' => 'required',
+        // 'body' => 'required',
         // 'pers_create' => 'required',
         // 'pers_assign' => 'required',
         'departament_id' => 'required'
@@ -74,8 +74,14 @@ class task extends Model
 
 public function departament()
     {
-        return $this->belongsTo('App\models\departament');
+        return $this->belongsTo('App\Models\departament','departament_id');
     }
+
+public function repository()
+    {
+        return $this->belongsTo('App\Models\repository', 'repository_id');
+    }
+
 
 public function comments()
     {
@@ -84,12 +90,9 @@ public function comments()
 
 public function status()
     {
-        return $this->belongsTo('App\Models\status','status_id');
+        return $this->belongsTo('App\Models\Status','status_id');
     }
-public function repository()
-    {
-        return $this->belongsTo('App\Models\repository','repository_id');
-    }
+
 public function priority()
     {
         return $this->belongsTo('App\Models\Priority','priority_id');
@@ -104,6 +107,13 @@ public function p_assign()
     {
         return $this->belongsTo('App\User','pers_assign');
     }
+
+public function watchers()
+    {
+        return $this->hasMany('App\Models\watchers');
+    }
+
+
 public function countTask()
     {
     task::get()->count();
@@ -111,7 +121,13 @@ public function countTask()
 
 
 
-
+public function addWatcher($user_id)
+    {
+        Watcher::create([
+                'user_id'=>request('user_id'),
+                'task_id'=>$this->id
+        ]);
+    }
 
 public function addComment($body)
     {

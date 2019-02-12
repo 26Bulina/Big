@@ -93,9 +93,19 @@ public function user()
     {
         return $this->hasOne('App\User');
     }
-public function job()
+public function jobb()
     {
-        return $this->belongsTo('App\Models\Job','job');
+        return $this->belongsTo('App\Models\job','job');
         // return $this->hasMany('App\Models\job');
+    }
+
+
+public function superior()
+    {
+        return $this->belongsTo('App\Models\Employee');
+    }
+public function subaltern()
+    {
+        return $this->hasMany('App\Models\Employee');
     }
 }

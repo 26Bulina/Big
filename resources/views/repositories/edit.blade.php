@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($repository, ['route' => ['repositories.update', $repository->id], 'method' => 'patch']) !!}
+                   {!! Form::model($repository, ['route' => ['repositories.update', $repository->id], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
 
                         @include('repositories.fields')
 

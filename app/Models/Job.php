@@ -57,7 +57,7 @@ public function departament()
     }
 public function employees() 
     {
-        return $this->hasMany('App\Models\employee');
+        return $this->hasMany('App\Models\Employee','job');
         // return $this->belongsTo('App\Models\employee','job');
     }
     

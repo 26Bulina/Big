@@ -91,6 +91,7 @@ class User extends Authenticatable
 
 
 
+
     public function notifs()
     {
         return $this->hasMany('App\Models\notifs');

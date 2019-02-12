@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\departament;
 
 class repositoryController extends AppBaseController
 {
@@ -50,7 +51,8 @@ class repositoryController extends AppBaseController
      */
     public function create()
     {
-        return view('repositories.create');
+        $departamentes = departament::pluck('name','id');
+        return view('repositories.create',compact('departamentes'));
     }
 
     /**
@@ -102,6 +104,8 @@ class repositoryController extends AppBaseController
     public function edit($id)
     {
         $repository = $this->repositoryRepository->findWithoutFail($id);
+        $departamentes = departament::pluck('name','id');
+        
 
         if (empty($repository)) {
             Flash::error('Repository not found');
@@ -109,7 +113,7 @@ class repositoryController extends AppBaseController
             return redirect(route('repositories.index'));
         }
 
-        return view('repositories.edit')->with('repository', $repository);
+        return view('repositories.edit',compact('departamentes','repository'));
     }
 
     /**

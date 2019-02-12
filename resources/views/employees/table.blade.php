@@ -28,8 +28,8 @@
             <td>{!! $employee->personal_email !!}</td>
             <td>{!! $employee->start_date !!}</td>
             <td>{!! $employee->end_date !!}</td>
-            <td>{!! $employee->superior_id !!}</td>
-            <td>{!! $employee->job !!}</td>
+            <td>{!! $employee->superior->first_name or ' ' !!} {!! $employee->superior->last_name or ' ' !!}</td>
+            <td>{!! $employee->jobb->name or ' ' !!}</td>
             <td>{!! $employee->admin !!}</td>
             <td>{!! $employee->photo !!}</td>
             <td>{!! $employee->hours_norm !!}</td>

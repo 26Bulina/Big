@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 use Auth;
-
+use App\User;
+use DB;
 use App\Http\Requests\CreatecommentRequest;
 use App\Http\Requests\UpdatecommentRequest;
 use App\Repositories\commentRepository;
+use App\Repositories\taskRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\task;
+use App\Models\watcher;
 use App\Models\comment;
 class commentController extends AppBaseController
 {
@@ -68,8 +71,31 @@ class commentController extends AppBaseController
 
     public function store(Task $task)
     {
+        // dd($task);
         $task->addComment(request('body'));
-        return view('tasks.show',compact('task'));
+        $users = User::pluck('name','id');
+
+        $us_dep_task = DB::table('users as u')
+            ->select(DB::raw('u.id uid'))
+            ->join('employees as e', 'e.id', '=', 'u.employee_id')
+            ->join('jobs as j', 'j.id', '=', 'e.job')
+            ->join('departaments as d', 'd.id', '=', 'j.departament_id')
+            ->join('tasks as t', 'd.id', '=', 't.departament_id')
+            ->where('t.id',$task->id)
+            ->get();
+        $x=[];
+        foreach($us_dep_task as $u){
+            $x[]=$u->uid;
+        }
+        $users = User::pluck('name','id');
+        // $tsk = $this->taskRepository->findWithoutFail($id);
+        // dd($x);
+        $watchers = watcher::with('user')->with('task')
+                    ->where('task_id',$task->id)
+                    // ->whereNotIn('user_id',[$tsk->pers_create])
+                    ->whereNotIn('user_id',$x)
+                    ->get();
+        return view('tasks.show',compact('task','watchers','users'));
 
     }
 

@@ -2,14 +2,14 @@
   <!-- submeniuri -->
   <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#tab1">Menu</a>
+          {{-- <a class="nav-link active" data-toggle="tab" href="#tab1">Menu</a> --}}
         </li>
-        <li class="nav-item">
+{{--         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#tab2">all</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#tab3">fa-fa</a>
-        </li>
+          <a class="nav-link" data-toggle="tab" href="#tab3">Notificari</a>
+        </li> --}}
   </ul>
   <!-- continut submeniuri -->
   <div class="tab-content">
@@ -37,14 +37,14 @@
         <div class="panel panel-default">
             <h4 class="list-group-item" data-toggle="collapse"> Admin</h4>
             <div class="panel-body">
-              <a href="{!! route('departaments.index') !!}" class="list-group-item">Department</a>
+              {{-- <a href="{!! route('departaments.index') !!}" class="list-group-item">Department</a> --}}
               <a href="{!! route('statuses.index') !!}" class="list-group-item">Status</a>
               <a href="{!! route('priorities.index') !!}" class="list-group-item">Priority</a>
-              <a href="{!! route('repositories.index') !!}" class="list-group-item">Repository</a>
+              
             </div>
         </div>
         <div class="panel panel-default">
-            <a  href="#"> Repo <span class="fa fa-unlock-alt" aria-hidden="true"></span></a>
+            {{-- <a  href="#"> Repo <span class="fa fa-unlock-alt" aria-hidden="true"></span></a> --}}
           {{--   <table>
                   @foreach($repositories as $repository)
                       <tr>
@@ -60,19 +60,22 @@
             <h4 class="list-group-item" data-toggle="collapse"> HR </h4>
             <div class="panel-body">
               <a href="{!! route('employees.index') !!}" class="list-group-item">Angajati</a>
-              <a href="{!! route('zilecos.index') !!}" class="list-group-item">zilecos</a>
-              <a href="{!! route('tipconcedius.index') !!}" class="list-group-item">Tip co</a>
-              <a href="{!! route('jobs.index') !!}" class="list-group-item">functii</a>
-              <a href="{!! route('departaments.index') !!}" class="list-group-item">Depar</a>
-              <a href="{!! route('notifs.index') !!}" class="list-group-item">notificari</a>
+              <a href="{!! route('zilecos.index') !!}" class="list-group-item">Zile concediu</a>
+              <a href="{!! route('tipconcedius.index') !!}" class="list-group-item">Tip concediu</a>
+              <a href="{!! route('jobs.index') !!}" class="list-group-item">Functii</a>
+              <a href="{!! route('departaments.index') !!}" class="list-group-item">Departamente</a>
+              
             </div>
         </div>
         @endif
         <!-- all users -->
+        <h4 class="list-group-item" data-toggle="collapse"> Meniu </h4>
         <div class="panel ">
+            <a href="{!! route('notifs.index') !!}" class="list-group-item">Notificari</a>
+            <a href="{!! route('repositories.index') !!}" class="list-group-item">Repository</a>
             <a class="padd list-group-item" href="{!! route('tasks.index') !!}" >
             <span class="fa fa-thumbtack fa-3x" aria-hidden="true"></span>  Tasks
-            <span class="badge badge-primary" style="background: #D67FFFFF; position:relative;">
+            <span class="badge badge-primary" style="background: #316BCDFF; position:relative;">
               {{ App\Models\task::all()->count() }} </span> 
             </a>
 
@@ -83,7 +86,6 @@
 
       </div>
     </div>
-
 
     <!-- tab 2 -->
     <div id="tab2" class="container tab-pane fade"><br>
@@ -128,10 +130,10 @@
                 <span>Tasks</span></a>
             </li>
 
-            <li class="{{ Request::is('watchers*') ? 'active' : '' }}">
+           {{--  <li class="{{ Request::is('watchers*') ? 'active' : '' }}">
                 <a href="{!! route('watchers.index') !!}">
                   <i class="fa fa-edit"></i><span>Watchers</span></a>
-            </li>
+            </li> --}}
 
             <li class="{{ Request::is('seens*') ? 'active' : '' }}">
                 <a href="{!! route('seens.index') !!}">
@@ -169,51 +171,111 @@
             </li>
     </div>
     <!-- tab 3 -->
-    <div id="tab3" class="container tab-pane fade"><br>
-      <div class="row justify-content-center">
-            <a href="#" class="padd list-group-item">
-                <span class="fa fa-users" aria-hidden="true"></span> 
-                <span class="fa fa-user-plus" aria-hidden="true"></span>
-                <span class="fa fa-user-secret" aria-hidden="true"></span>   
-                <span class="fa fa-thumbs-up" aria-hidden="true"></span> 
-                <span class="fa fa-thumbtack" aria-hidden="true"></span>
-                <hr>
-                <span class="fa fa-bell" aria-hidden="true"></span>
-                <span class="fa fa-tools" aria-hidden="true"></span> 
-                <span class="fa fa-comment" aria-hidden="true"></span>
-                <span class="fa fa-shopping-basket" aria-hidden="true"></span>
-                <span class="fa fa-paper-clip" aria-hidden="true"></span> 
-                <span class="fa fa-keyboard" aria-hidden="true"></span>
-            </a>
-      </div>
-      <div class="row justify-content-center">
-            <div class="card">
-              <div class="card-header"> Idei </div>
-              <div class="card-body">
-                <div id="accordion">
-                  <div class="card">
-                    <div class="card-header" id="item1">
-                      <h5 class="mb-0"> 
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">  Item #1 </button>
-                      </h5>
-                    </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="item1" data-parent="#accordion"><div class="card-body"> body 1  </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-header" id="item2">
-                      <h5 class="mb-0">
-                      <button class="btn btn-link " data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="item2"> Item #2
-                      </button>
-                      </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion"><div class="card-body">body 2  </div>
-                    </div>
-                  </div>
+    <div id="tab3" class="container tab-pane fade">
+
+      
+
+    {{--   <div class="panel panel-default">
+            <h4 class="list-group-item" data-toggle="collapse"> N
+              @if (Auth::user()->admin == 2)
+              <div class="row">
+                <h1 class="col-sm-5 col-md-offset-10">
+                   <a class="btn btn-primary pull-right" style="margin-top: 0px;margin-bottom: 5px" href="{!! route('notifs.create') !!}">Add new</a>
+                </h1>
                 </div>
-              </div>
+              @endif
+            </h4>
+            <div class="panel-body">
+              <a href="{!! route('notifs.index') !!}" class="list-group-item">notificari</a>
             </div>
+        </div>
+ --}}
+
+
+{{-- 
+@if(count($notification1))
+<div class="card  col-md-12">
+  <div class="card-header"> Update-uri </div>
+  <div class="card-body">
+    @foreach($notification1 as $notif)
+    <div class="row">
+      <div class="col-xs-12"> <h5>{{ $notif->title }}</hr>  </h5> </div>
+      <div class="col-xs-2">
+            @if (Auth::user()->admin == 2)
+            <td>
+              {!! Form::open(['route' => ['notifs.destroy', $notif->id], 'method' => 'delete']) !!}
+              <div class='btn-group'>
+                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+              </div>
+              {!! Form::close() !!}
+            </td>
+            @endif
       </div>
+      </div>
+      <div class="row"> {{ $notif->body }} </div>
+      <hr>
+      @endforeach
+  </div>
+  @endif
+
+</div>
+@if(count($notification2))
+<div class="card  col-md-12">
+  <div class="card-header"> Happy Team </div>
+  <div class="card-body">
+    @foreach($notification2 as $notif)
+    <div class="row">
+      <div class="col-xs-12"> <h5>{{ $notif->title }}</hr>  </h5> </div>
+      <div class="col-xs-2">
+            @if (Auth::user()->admin <> 0)
+            <td>
+              {!! Form::open(['route' => ['notifs.destroy', $notif->id], 'method' => 'delete']) !!}
+              <div class='btn-group'>
+                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+              </div>
+              {!! Form::close() !!}
+            </td>
+            @endif
+      </div>
+      </div>
+      <div class="row"> {{ $notif->body }} </div>
+      <hr>
+      @endforeach
+  </div>
+  @endif
+
+</div>
+@if(count($notification3))
+<div class="card  col-md-12">
+  <div class="card-header"> Update-uri </div>
+  <div class="card-body">
+    @foreach($notification3 as $notif)
+    <div class="row">
+      <div class="col-xs-12"> <h5>{{ $notif->title }}</hr>  </h5> </div>
+      <div class="col-xs-2">
+            @if (Auth::user()->admin <> 0)
+            <td>
+              {!! Form::open(['route' => ['notifs.destroy', $notif->id], 'method' => 'delete']) !!}
+              <div class='btn-group'>
+                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+              </div>
+              {!! Form::close() !!}
+            </td>
+            @endif
+      </div>
+      </div>
+      <div class="row"> {{ $notif->body }} </div>
+      <hr>
+      @endforeach
+  </div>
+  @endif
+
+
+  </div>
+
+
+
     </div>
   </div>
 </div>
+ --}}

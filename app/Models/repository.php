@@ -25,7 +25,8 @@ class repository extends Model
 
     public $fillable = [
         'name',
-        'description'
+        'description',
+        'departament_id'
     ];
 
     /**
@@ -35,7 +36,8 @@ class repository extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'description' => 'string'
+        'description' => 'string',
+        'departament_id' => 'integer'
     ];
 
     /**
@@ -47,8 +49,12 @@ class repository extends Model
         'name' => 'min:3'
     ];
 
+    public function departament()
+    {
+        return $this->belongsTo('App\Model\departament','departament_id');
+    }
     public function tasks()
     {
-        return $this->hasMany('App\Model\Task');
+        return $this->hasMany('App\Models\task');
     }
 }

@@ -56,5 +56,8 @@ public function jobs()
     {
         return $this->hasMany('App\models\job');
     }
-
+public function repositories()
+    {
+        return $this->hasMany('App\Models\repository');
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\CreateEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Repositories\EmployeeRepository;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Flash;
 use DB;
@@ -55,9 +56,13 @@ class EmployeeController extends AppBaseController
         $eid = Auth::user()->employee_id;
         $uid = Auth::user()->id;
         // $profil = DB::table('employees')->where('id', $eid)->get();
-         $profil = Employee::with('job')->where('id', $eid)->get();
+         $profil = Employee::with('jobb')->where('id', $eid)->get();
+// dd($profil);
         // $concediu = DB::table('periodcos')->where('user_id', $uid)->get();
         $concediu = periodco::with('tipco')->where('user_id', $uid)->get();
+
+        $fct = job::with('employees')->where('id',$profil[0]->job)->get();
+
         // $zileco = DB::table('zilecos')->where('user_id', $uid)->get();
         $zileco = zileco::with('tipconcediu')->where('user_id', $uid)->get();
 
@@ -74,8 +79,12 @@ class EmployeeController extends AppBaseController
                     inner join zilecos z on z.user_id=pp.u 
                                          and z.tipconcediu_id=pp.tc'
                     ));
+        // return \Redirect::back() 
+        //     ->with('message','Operation Successful !')
+        //     ->with(compact('employees','fct','users','profil','concediu','ramase','zileco','eid'));
 
-        return view('profile', compact('employees','users','profil','concediu','ramase','zileco','eid'));
+        // return Redirect::back()->with('message','Operation Successful !');
+        return view('profile', compact('employees','fct','users','profil','concediu','ramase','zileco','eid'));
     }
 
 

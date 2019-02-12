@@ -8,7 +8,13 @@ use App\Repositories\watcherRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Auth;
+use App\User;
+use App\Models\watcher;
+use App\Models\task;
 use Prettus\Repository\Criteria\RequestCriteria;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Response;
 
 class watcherController extends AppBaseController
@@ -53,16 +59,39 @@ class watcherController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreatewatcherRequest $request)
+
+    public function store(Task $task)
     {
-        $input = $request->all();
-
-        $watcher = $this->watcherRepository->create($input);
-
-        Flash::success('Watcher saved successfully.');
-
-        return redirect(route('watchers.index'));
+// dd($task);
+        // $task = $this->taskRepository->findWithoutFail($id);
+        $task->addWatcher(request('user_id'));
+        
+        Flash::success('Watcher saved successfully.');     
+        // return view('tasks.show',compact('task'));
+        return redirect()->route('tasks.show', ['id' => $task->id]);
     }
+
+//     public function store(CreatewatcherRequest $request)
+//     {
+//         // dd($request);
+//         $watcher = new watcher;
+//         $watcher->user_id = Input::get("user_id");
+//         $watcher->task_id = Input::get("task_id"); 
+
+//         $watcher->save();
+//         $t = $watcher->task_id;
+//         if (empty($watcher)) {
+//             Flash::error('watcher not found');
+//             return redirect(route('watchers.index'));
+//         }
+//         Flash::success('Watcher saved successfully.');
+
+// // return Redirect::back()->with('message','Operation Successful !');
+//      // return redirect(route('tasks.show',compact('t')));
+
+
+//         return redirect()->route('tasks.show', ['id' => $t]);
+//     }
 
     /**
      * Display the specified watcher.
@@ -139,17 +168,20 @@ class watcherController extends AppBaseController
     public function destroy($id)
     {
         $watcher = $this->watcherRepository->findWithoutFail($id);
+       
+        $t = $watcher->task_id;
 
         if (empty($watcher)) {
-            Flash::error('Watcher not found');
+            Flash::error('watcher not found');
 
             return redirect(route('watchers.index'));
         }
 
         $this->watcherRepository->delete($id);
 
-        Flash::success('Watcher deleted successfully.');
+        Flash::success('watcher deleted successfully.');
 
-        return redirect(route('watchers.index'));
+        return redirect(route('tasks.show',compact('t')));
+
     }
 }

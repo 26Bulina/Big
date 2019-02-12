@@ -17,8 +17,10 @@ class CreaterepositoriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
+            $table->integer('departament_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('departament_id')->references('id')->on('departamentes');
         });
     }
 

@@ -2,9 +2,7 @@
 @section('task')
 
 
-
-
-        <table class="table table-responsive" id="tasks-table">
+{{--         <table class="table table-responsive" id="tasks-table">
         <tbody>
             @foreach($departamentes as $dep)
             
@@ -17,12 +15,7 @@
             @endforeach
         </tbody>
         </table>
-
-
-
-
-
-
+ --}}
 
 
 

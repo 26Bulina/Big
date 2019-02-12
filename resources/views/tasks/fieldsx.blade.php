@@ -33,6 +33,11 @@
     {!! Form::label('priority_id', 'Priority Id:') !!}
     {!! Form::select('priority_id', $priorities, null, ['class' => 'form-control']) !!}
 </div>
+<!-- departament Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('departament_id', 'departament Id:') !!}
+    {!! Form::select('departament_id', $departaments, null, ['class' => 'form-control']) !!}
+</div>
 
 <!-- Repository Id Field -->
 <div class="form-group col-sm-6">
@@ -40,11 +45,6 @@
     {!! Form::select('repository_id', $repositories, null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- departament Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('departament_id', 'departament Id:') !!}
-    {!! Form::select('departament_id', $departaments, null, ['class' => 'form-control']) !!}
-</div>
 
 <!-- Fisier Field -->
 <div class="form-group col-sm-6">

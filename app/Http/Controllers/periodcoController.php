@@ -11,7 +11,11 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\periodco;
+use App\Models\zileco;
+use App\Models\job;
+use App\Models\Employee;
 use Auth;
+use DB;
 use App\Models\tipconcediu;
 use Illuminate\Support\Facades\Input;
 
@@ -45,7 +49,7 @@ class periodcoController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create() 
     {
         $tipconcedius = Tipconcediu::pluck('name','id');
         return view('periodcos.create',compact('tipconcedius'));
@@ -113,16 +117,34 @@ $zile= ($time2-$time1) / (60 * 60 * 24);
      */
     public function edit($id)
     {
+        // $users =  Auth::user();
         $tipconcedius = Tipconcediu::pluck('name','id');
         $periodco = $this->periodcoRepository->findWithoutFail($id);
+        // $zileco = zileco::with('tipconcediu')->where('user_id', Auth::user()->id)->get();
+        // $concediu = periodco::with('tipco')->where('user_id',  Auth::user()->id)->get();
+        // $profil = Employee::with('job')->where('id', Auth::user()->employee_id)->get();
+        // $fct = job::with('employees')->where('id',$profil[0]->job)->get();
+        // $ramase = DB::select( DB::raw(
+        //     'select pp.u, pp.tc, pp.nrz, 
+        //             z.user_id, z.tipconcediu_id, z.nr_zile ,
+        //             z.nr_zile-pp.nrz ramase
+        //             from (  select p.user_id u, p.tipconcediu_id tc,
+        //                          sum(p.nrzile) nrz
+        //                     from periodcos p
+        //                     group by p.user_id,p.tipconcediu_id 
+        //                  ) pp
+        //             inner join zilecos z on z.user_id=pp.u 
+        //                                  and z.tipconcediu_id=pp.tc'
+        //             ));
 
         if (empty($periodco)) {
             Flash::error('Periodco not found');
-
             return redirect(route('periodcos.index'));
         }
 
-        return view('periodcos.edit',compact('periodco','tipconcedius'));
+        return view('periodcos.edit',compact('periodco',
+            // 'users','zileco','concediu','fct','profil','ramase',
+            'tipconcedius'));
     }
 
     /**

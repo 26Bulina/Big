@@ -10,21 +10,22 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">{!! Auth::user()->name !!}</h1>
-            <p class="text-white mt-0 mb-5">Te rugam sa verifici datele tale personale si sa le actualizezi de fiecare data cand este cazul!</p>
+            <h1 class="display-5">{!! Auth::user()->name !!}</h1>
+            <p class="mt-0 mb-5" style="color: #2F344BB8;">Te rugam sa verifici datele tale personale si sa le actualizezi de fiecare data cand este cazul!</p>
             
           </div>
         </div>
       </div>
 
 
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-9">
         <div class="card">
             <div class=" card-header row">
                 <div class="col-md-6"> Concediu   </div>
                 <div >
                     <h1 class="pull-right">
-                    <a href="{!! route('periodcos.create') !!}" class="btn btn-info">Adauga Concediu</a>
+                    <a href="{!! route('periodcos.create') !!}" 
+                    class="btn btn-info">Adauga Concediu</a>
                     </h1>
                 </div>
             </div>
@@ -33,12 +34,13 @@
               <div class="card">
                 <div class="card-header" id="item1">
                   <h5 class="mb-0"> 
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">  Sumar concediu</button>
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" >  Sumar concediu</button>
                   </h5>
                 </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="item1" data-parent="#accordion"><div class="card-body"> 
+                <div id="collapseOne" class="collapse"  data-parent="#accordion"><div class="card-body"> 
 
-                    <table class="table table-responsive" id="periodcos-table">
+                    <table class="table table-respon
+                    sive" id="periodcos-table">
                         <thead> 
                             <tr>
                             <th>Tip Concediu</th>
@@ -59,10 +61,6 @@
                         @endforeach
                         </tbody>
                     </table>
-
-
-
-
                   </div>
                 </div>
               </div>
@@ -84,7 +82,7 @@
                                 <th>End Date</th>
                                 <th>Tip concediu</th>
                                 <th>Nr zile</th>
-                                <th colspan="3">Action</th>
+                              {{--   <th colspan="3">Action</th> --}}
                                 </tr>
                             </thead>
                             <?php $key=0; ?>
@@ -98,12 +96,23 @@
                                     <td>{!! $co->nrzile!!}</td>
                                     <td>
                                         @if( $co->start_date > now())
-                                        {!! Form::open(['route' => ['periodcos.destroy', $co->id], 'method' => 'delete']) !!}
-                                        <div class='btn-group'>
-                                            <a href="{!! route('periodcos.edit', [$co->id]) !!}" class='btn btn-success btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                                            {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                                        </div>
-                                        {!! Form::close() !!}
+
+              {!! Form::open(['route' => ['periodcos.destroy', $co->id], 'method' => 'delete']) !!}
+
+                   <a href="{!! route('periodcos.edit', [$co->id]) !!}" 
+                        data-toggle="tooltip"  title="modifica"
+                        style = "padding: 0.9rem"
+                        class='btn btn-warning btn-lg' >
+                        <i class="glyphicon glyphicon-edit"></i></a>
+                
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>',
+                         ['type' => 'submit',
+                         'data-toggle' => 'tooltip',
+                         'title' => 'sterge',
+                         'style' => 'padding: 0.9rem',
+                          'class' => 'btn btn-danger btn-lg',
+                          'onclick' => "return confirm('Esti sigur ca vrei sa stergi?')"]) !!}
+                {!! Form::close() !!}
                                         @endif
                                     </td>
                                 </tr>
@@ -124,42 +133,37 @@
 
 
 @foreach ( $profil as $p)
-    <div class="col-6 col-md-4">
+{{-- {{dd($profil)}} --}}
+    <div class="col-4 col-md-3">
 
     <!-- Page content -->    
       <div class="row">
-        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        {{-- <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0"> --}}
           <div class="card card-profile shadow">
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
-                <div class="card-profile-image">
-                  <a href="#">
-                    <img src="../assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
-                  </a>
-                </div>
               </div>
             </div>
 
-            <div class="card-body pt-0 pt-md-4">
+            <div class="card-body pt-0 pt-md-4" style="background-image: linear-gradient(#8BAABBB8, #FFFFFFFF ) ">
 
               <div class="text-center">
                 <h3>
-                  nume prenume<span class="font-weight-light">, 27</span>
+                  {!! $p->first_name!!} {!! $p->last_name!!}
+                  <span class="font-weight-light"></span>
                 </h3>
-                <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>adresa
-                </div>
-                <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>functie
+                <div class="h5 mt-4"> 
+                  <i class="ni business_briefcase-24 mr-2"></i>
+                  {{$fct[0]->name}}
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i>data inceput sfarsit 
+                  <i class="ni education_hat mr-2"></i>
                 </div>
                 <hr class="my-4" />
-                <p>vdfvf</p>
+                <p>{{$users->email}}</p>
               </div>
             </div>
-          </div>
+          {{-- </div> --}}
         </div>
       </div>
     </div>
@@ -170,168 +174,62 @@
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Concedii</h3>
+                  <h3 class="mb-0">Informatii personale</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Add</a>
+                  <a href="{!! route('employees.edit', [$p->eid]) !!}" class="btn btn-info">Actualizeaza datele </a>
                 </div>
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background-image: linear-gradient(#8BAABBB8, #FFFFFFFF ) ">
               <form>
-                <h6 class="heading-small text-muted mb-4">User information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name"> First name</label> 
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative"  value="{!! $p->first_name!!}"> 
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control form-control-alternative" value="New York">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control form-control-alternative"  value="United States">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">About me</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful description.</textarea>
-                  </div>
+                <div class="pl-lg-4" >
+                      
+          
+<div class="container-fluid" >
+
+    <div class="row">
+        <div col-md-3 ><h4>Nume</h4></div>
+        <div col-md-5><h4>{!! $p->first_name !!} {!! $p->last_name !!} </h2></div>
+    </div><hr class="my-1" />
+    <div class="row">
+        <div col-md-3 ><h4>CNP</h4></div>
+        <div col-md-5><h2>{!! $p->cnp !!} </h2></div>
+    </div><hr class="my-1" />
+    <div class="row">
+        <div col-md-3 ><h4>Adresa</h4></div>
+        <div col-md-5><h2>{!! $p->address  or ' ' !!} </h2></div>
+    </div><hr class="my-1" />
+    <div class="row">
+        <div col-md-3 ><h4>Telefon personal</h4></div>
+        <div col-md-5><h2>{!! $p->personal_phone  or ' '!!}  </h2></div>
+    </div><hr class="my-1" />
+    <div class="row">
+        <div col-md-3 ><h4>E-mail personal</h4></div>
+        <div col-md-5><h2>{!! $p->personal_email  or ' '!!}  </h2></div>
+    </div><hr class="my-1" />
+    <div class="row">
+        <div col-md-3 ><h4>Prima zi de lucru</h4></div>
+        <div col-md-5><h2>{!! $p->start_date  or ' '!!}  </h2></div>
+    </div><hr class="my-1" />
+    <div class="row">
+        <div col-md-3 ><h4>Ultima zi de lucru</h4></div>
+        <div col-md-5><h2>{!! $p->end_date or ' '!!}   </h2></div>
+    </div><hr class="my-1" />
+    <div class="row">
+        <div col-md-3 ><h4>Norma (ore)</h4></div>
+        <div col-md-5><h2>{!! $p->hours_norm  or ' '!!} </h2></div>
+    </div>
+  </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container-fluid">
-
-    <div class="row">
-        <div col-md-3 ><h4>Nume</h4></div>
-        <div col-md-5><h5>{!! $p->first_name !!} {!! $p->last_name !!} </h5></div>
-    </div>
-    <div class="row">
-        <div col-md-3 ><h4>CNP</h4></div>
-        <div col-md-5><h5>{!! $p->cnp !!} </h5></div>
-    </div>
-    <div class="row">
-        <div col-md-3 ><h4>Adresa</h4></div>
-        <div col-md-5><h5>{!! $p->address  or ' ' !!} </h5></div>
-    </div>
-    <div class="row">
-        <div col-md-3 ><h4>Telefon personal</h4></div>
-        <div col-md-5><h5>{!! $p->personal_phone  or ' '!!}  </h5></div>
-    </div>
-    <div class="row">
-        <div col-md-3 ><h4>E-mail personal</h4></div>
-        <div col-md-5><h5>{!! $p->personal_email  or ' '!!}  </h5></div>
-    </div>
-    <div class="row">
-        <div col-md-3 ><h4>Functie</h4></div>
-        <div col-md-5><h5>{!! $p->job !!}  </h5></div>
-    </div>
-    <div class="row">
-        <div col-md-3 ><h4>Prima zi de lucru</h4></div>
-        <div col-md-5><h5>{!! $p->start_date  or ' '!!}  </h5></div>
-    </div>
-    <div class="row">
-        <div col-md-3 ><h4>Ultima zi de lucru</h4></div>
-        <div col-md-5><h5>{!! $p->end_date or ' '!!}   </h5></div>
-    </div>
-    <div class="row">
-        <div col-md-3 ><h4>Norma (ore)</h4></div>
-        <div col-md-5><h5>{!! $p->hours_norm  or ' '!!} </h5></div>
-    </div>
 
     @endforeach
 </div>

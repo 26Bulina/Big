@@ -19,11 +19,11 @@ class CreatetasksTable extends Migration
             $table->text('body');
             $table->integer('pers_create')->unsigned();
             $table->integer('pers_assign')->unsigned();
-            $table->integer('status_id')->unsigned()->default(1);
-            $table->integer('priority_id')->unsigned('default.jpg');
+            $table->integer('status_id')->unsigned();
+            $table->integer('priority_id')->unsigned();
             $table->integer('repository_id')->unsigned();
             // $table->integer('departament_id')->unsigned();
-            $table->string('fisier')->default();
+            $table->string('fisier')->default('default.jpg');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('pers_create')->references('id')->on('users');

@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\notif;
+use Illuminate\Support\Facades\Input;
 
+use Auth;
 use App\Http\Requests\CreatenotifRequest;
 use App\Http\Requests\UpdatenotifRequest;
 use App\Repositories\notifRepository;
@@ -33,11 +36,15 @@ class notifController extends AppBaseController
     {
         // $u = user::find(1)->notifs;
         // dd($u);
+        $notification1 = notif::where ('modif_app',1)->get();
+        $notification2 = notif::where ('happy_team',1)->get();
+        $notification3 = notif::where ('work_team',1)->get();
+
         $this->notifRepository->pushCriteria(new RequestCriteria($request));
         $notifs = $this->notifRepository->all();
 
-        return view('notifs.index')
-            ->with('notifs', $notifs);
+        return view('notifs.index',
+            compact('notifs','notification1','notification2','notification3'));
     }
 
     /**
@@ -48,7 +55,11 @@ class notifController extends AppBaseController
     public function create()
     {
         $users = User::pluck('name','id');
-        return view('notifs.create',compact('users'));
+        $notification1 = notif::where ('modif_app',1)->get();
+        $notification2 = notif::where ('happy_team',1)->get();
+        $notification3 = notif::where ('work_team',1)->get();
+        return view('notifs.create',
+                compact('users','notification1','notification2','notification3'));
     }
 
     /**
@@ -60,11 +71,18 @@ class notifController extends AppBaseController
      */
     public function store(CreatenotifRequest $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        $notif = $this->notifRepository->create($input);
-
-        Flash::success('Notif saved successfully.');
+        // $notif = $this->notifRepository->create($input);
+        $notif = new notif;
+        $notif->title = Input::get("title");
+        $notif->body = Input::get("body");
+        $notif->user_id = Auth::user()->id;
+        $notif->modif_app = Input::get("modif_app");
+        $notif->happy_team = Input::get("happy_team");
+        $notif->work_team = Input::get("work_team");
+        $notif->save();
+        Flash::success('Notificare salvata cu succes.');
 
         return redirect(route('notifs.index'));
     }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\task;
 use App\Models\repository;
 use App\Models\departament;
+use App\Models\notif;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -31,11 +33,16 @@ class HomeController extends Controller
 
     public function index()
     {
+        $notification1 = notif::where ('modif_app',1)->get();
+        $notification2 = notif::where ('happy_team',1)->get();
+        $notification3 = notif::where ('work_team',1)->get();
+        $repositories = repository::with('tasks')->get();
         $departamentes = departament::with('tasks')->get();
         $tasks = task::latest()
-                        ->paginate(3)
+                        ->where('pers_assign',Auth::user()->id)
+                        ->paginate(15)
                         ;
-        return view('home',compact('departamentes','tasks'));
+        return view('home',compact('departamentes','notification1','notification2','notification3','repositories','tasks'));
         // return view('home');
     }
 
@@ -46,11 +53,22 @@ class HomeController extends Controller
                         ->where('departament_id',$id)
                         ->paginate(3)
                         ;
-
         return view('home',compact('departamentes','tasks'));
         // return view('home');
     }
 
+
+     public function repository($id)
+    {
+        $repositories = repository::with('tasks')->get();
+        $tasks = task::latest()
+                        ->where('repository_id',$id)
+                        ->paginate(3)
+                        ;
+
+        return view('home',compact('repositories','tasks'));
+        // return view('home');
+    }
 
     public function app()
     {

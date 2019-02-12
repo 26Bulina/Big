@@ -10,6 +10,12 @@
     {!! Form::text('description', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Departament Field --> 
+<div class="form-group col-sm-12">
+    {!! Form::label('departament_id', 'departament:') !!}
+    {!! Form::select('departament_id', $departamentes, null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
