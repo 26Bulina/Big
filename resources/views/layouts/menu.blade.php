@@ -35,7 +35,7 @@
         <!-- only admin   -->
         @if (Auth::user()->admin == 2)
         <div class="panel panel-default">
-            <h4 class="list-group-item" data-toggle="collapse"> Admin</h4>
+            <h4 class="list-group-item" data-toggle="collapse" style="background-image: linear-gradient(#8BAABBB8, #FFFFFFFF ) "> Admin</h4>
             <div class="panel-body">
               {{-- <a href="{!! route('departaments.index') !!}" class="list-group-item">Department</a> --}}
               <a href="{!! route('statuses.index') !!}" class="list-group-item">Status</a>
@@ -57,7 +57,7 @@
         <!-- admin + hr -->
         @if (Auth::user()->admin <> 0)
         <div class="panel panel-default">
-            <h4 class="list-group-item" data-toggle="collapse"> HR </h4>
+            <h4 class="list-group-item" data-toggle="collapse" style="background-image: linear-gradient(#8BAABBB8, #FFFFFFFF ) "> HR </h4>
             <div class="panel-body">
               <a href="{!! route('employees.index') !!}" class="list-group-item">Angajati</a>
               <a href="{!! route('zilecos.index') !!}" class="list-group-item">Zile concediu</a>
@@ -69,14 +69,14 @@
         </div>
         @endif
         <!-- all users -->
-        <h4 class="list-group-item" data-toggle="collapse"> Meniu </h4>
+        <h4 class="list-group-item" data-toggle="collapse" style="background-image: linear-gradient(#8BAABBB8, #FFFFFFFF ) "> Meniu </h4>
         <div class="panel ">
             <a href="{!! route('notifs.index') !!}" class="list-group-item">Notificari</a>
             <a href="{!! route('repositories.index') !!}" class="list-group-item">Repository</a>
             <a class="padd list-group-item" href="{!! route('tasks.index') !!}" >
             <span class="fa fa-thumbtack fa-3x" aria-hidden="true"></span>  Tasks
-            <span class="badge badge-primary" style="background: #316BCDFF; position:relative;">
-              {{ App\Models\task::all()->count() }} </span> 
+            {{-- <span class="badge badge-primary" style="background: #316BCDFF; position:relative;"> --}}
+              {{-- {{ App\Models\task::all()->count() }} </span>  --}}
             </a>
 
             

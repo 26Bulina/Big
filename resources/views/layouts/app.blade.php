@@ -8,9 +8,39 @@
         <title>{{ config('app.name') }}</title>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        {{-- <script src="{{ asset('js/tinymce.min.js') }}"></script> --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        {{-- <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"> --}}
+
+<script src="{{ asset ('/vendor/ckeditor/ckeditor.js')}}"></script>
+<script src="{{ asset ('/vendor/ckeditor/adapters/jquery.js')}}"></script>
+<script src="{{ asset ('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+<script src="{{ asset ('/vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
+
+
+
+{{-- <script src="{{ asset('/js/tinymce/js/tinymce/tinymce.min.js') }}" defer></script>
+<script src="{{ asset('/js/tinymce/js/tinymce/jquery.tinymce.min.js') }}" defer></script> --}}
+
+
+{{-- <script src="{{ asset('js/tinymce.min.js') }}" defer></script> --}}
+{{-- <script src="{{ asset('resources/js/jquery.tinymce.min.js') }}" defer></script> --}}
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+{{-- <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script> --}}
+<script>tinymce.init({ selector:'textarea' });</script>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+
+
 
  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" /> --}}
 {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> --}}
@@ -32,15 +62,13 @@
         {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 
     </head>
-    
-    <body 
-    /*style="background-image: linear-gradient(#3573BE58, #FFFFFFFF ) "*/
-    >
+    {{-- style="background-image: linear-gradient(#3573BE58, #FFFFFFFF)" --}}
+    <body >
         @include('layouts/onav')
         <div class="container-fluid">
             {{-- <div class="row justify-content-center "> --}}
             <div class="row ">
-                <div class="col-3">
+                <div class="col-2 offset-1" style="padding-right: 0px">
                 <nav class="navbar navbar-expand-sm navbar-light navbar-laravel">
                         <button class="navbar-toggler" type="button"
                             data-toggle="collapse" data-target="#mm"
@@ -50,23 +78,23 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     <div class="collapse navbar-collapse" id="mm" >
-                            <div class="padd list-group   ">
+                            {{-- <div   "> --}}
                                 @auth
                                 @include('layouts/menu')
                                 @endauth
-                            </div>
+                            {{-- </div> --}}
                     </div>
                 </nav>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                             {{-- <div class="panel panel-fluid"> --}}
-                                <main >
-                                    {{-- <img src="{{url('/storage/app/public/logo3.jpg')}}">
-                                    <img src="{{ URL::to('/storage/app/logo3.jpg') }}">
-                                    <img src="{{ asset('/storage/app/logo3.jpg')}}" alt=".">
-                                    {{ asset('/storage/app/logo3.jpg') }} --}}
-                                    @yield('content')
-                                </main>
+                            <main >
+                                {{-- <img src="{{url('/storage/app/public/logo3.jpg')}}">
+                                <img src="{{ URL::to('/storage/app/logo3.jpg') }}">
+                                <img src="{{ asset('/storage/app/logo3.jpg')}}" alt=".">
+                                {{ asset('/storage/app/logo3.jpg') }} --}}
+                                @yield('content')
+                            </main>
                             {{-- </div> --}}
                 </div>
             </div>
@@ -85,6 +113,17 @@
       </footer>
 
 
-
     </body>
+
+<script>
+    $(document).ready(function() {
+
+           $('#technig').summernote({
+
+             height:300,
+
+           });
+
+       });
+</script>
 </html>

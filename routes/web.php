@@ -1,5 +1,13 @@
 <?php
 
+
+Route::get('summernoteeditor',array('as'=>'summernoteeditor.get','uses'=>'SummernotefileController@getSummernoteeditor'));
+
+Route::post('summernoteeditor',array('as'=>'summernoteeditor.post','uses'=>'SummernotefileController@postSummernoteeditor'));
+
+Route::get('/summer', 'SummernoteController@index')->name('summer');
+
+
 Route::get('/test', function () {
 	  $not = DB::table('notifs')
                         ->select('users.email')

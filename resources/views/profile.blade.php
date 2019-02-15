@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-lg-7 col-md-10">
             <h1 class="display-5">{!! Auth::user()->name !!}</h1>
-            <p class="mt-0 mb-5" style="color: #2F344BB8;">Te rugam sa verifici datele tale personale si sa le actualizezi de fiecare data cand este cazul!</p>
+            <p class="mt-0 mb-5" style="color: #2F344BB8;">Te rugam sa verifici datele tale personale!</p>
             
           </div>
         </div>
@@ -177,7 +177,7 @@
                   <h3 class="mb-0">Informatii personale</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="{!! route('employees.edit', [$p->eid]) !!}" class="btn btn-info">Actualizeaza datele </a>
+                {{--   <a href="{!! route('employees.edit', [$p->eid]) !!}" class="btn btn-info">Actualizeaza datele </a> --}}
                 </div>
               </div>
             </div>

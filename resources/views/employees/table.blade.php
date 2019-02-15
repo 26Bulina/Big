@@ -9,7 +9,7 @@
         <th>Personal Email</th>
         <th>Start Date</th>
         <th>End Date</th>
-        <th>Superior Id</th>
+        <th>Superior</th>
         <th>Job</th>
         <th>admin</th>
         <th>Photo</th>

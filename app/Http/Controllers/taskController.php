@@ -117,8 +117,12 @@ public function user_dep($user_dep, $uid) {
         //             ->get(); 
         $task = task::find(1);              
         $s = $request->input('s');
-        $p_assign = $task->p_assign['name'];
-        $p_create = $task->p_create['name'];
+    //     dd($task);
+    //     if($task <> null)
+    //     {
+    //     $p_assign = $task->p_assign['name'];
+    //     $p_create = $task->p_create['name'];
+    // }  else 
 
     //    ---------repository-----------------------------------------------------
         $uid = Auth::user()->id;
@@ -290,15 +294,19 @@ $request->get('repo_id');
         $task->departament_id = Input::get("departament_id");
         $task->created_at = Input::get("created_at");
 
+
+
         $first_user_dep = DB::table('users as u')
-             ->select(DB::raw( 'u.id uid, j.name functie,d.id did, d.name departament,r.id rid, r.name repository'))
+             ->select(DB::raw( 'u.id uid, j.name functie,d.id did, d.name departament
+                ,r.id rid, r.name repository  '))
              ->join('employees as e', 'e.id', '=', 'u.employee_id')
              ->join('jobs as j', 'j.id', '=', 'e.job')
              ->join('departaments as d', 'd.id', '=', 'j.departament_id')
-             ->join ('repositories as r', 'd.id', '=', 'r.departament_id')
+             ->leftJoin ('repositories as r', 'd.id', '=', 'r.departament_id')
              ->where('d.id','=',$request->get('departament_id'))
              ->first(); // alege un singur user din departament
-// dd($user_dep);
+
+
 
         $pers_co = DB::table('periodcos as co')
                  ->select(DB::raw( 'co.user_id user'))
@@ -336,7 +344,7 @@ $request->get('repo_id');
 
 
 
-                       
+                       // dd($first_user_dep);
     if ( count($nr_task) >0) {
         $task->pers_assign =  $nr_task[0]->pers_assign;
     } else {

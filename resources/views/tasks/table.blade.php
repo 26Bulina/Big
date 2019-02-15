@@ -6,7 +6,7 @@
 <table>
 <tbody>
     @foreach($repositories as $repo)
-         <h3>{{ $repo->name}} </h3> 
+         <h3 style="color: #4B6BB3BD;">{{ $repo->name}} </h3> 
     <table class="table table-responsive" id="tasks-table">
     <thead>
         <tr>

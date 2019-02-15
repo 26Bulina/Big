@@ -49,9 +49,11 @@
                     <div class="row" style="padding-left: 10px">
                         <div class="form-group">
                             {!! Form::label('body', 'Body:') !!}
-                            <div class="" style="padding: 10px">
+<div class="col-lg-8" style="padding: 10px" name="body"><?php echo wordwrap($task->body , 3000, "<br />");?></div>
+
+                            {{-- <div class="" style="padding: 10px">
                                 <p>{!! $task->body !!}</p>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <hr>
@@ -65,15 +67,26 @@
                 </div>
             </div>
         </div>
-        <div class="card col-md-5">
-             {!! $task->priority->name!!}, {!! $task->status->name or ' '!!}, 
-             {!! $task->repository->name!!},{!! $task->departament->name!!},
-             create de:{!! $task->p_create->name!!}, asignat: {!! $task->p_assign->name!!}
-             <hr>
+        <div class="card col-md-5" >
+             Prioritate:  {!! $task->priority->name or ' '!!} 
+             <hr style="padding: 0.0rem; margin-top: 0.1rem;margin-bottom: 0.1rem">
+             Status:   {!! $task->status->name or ' '!!}
+             <hr style="padding: 0.0rem; margin-top: 0.1rem;margin-bottom: 0.1rem">
+             Repository:  {!! $task->repository->name or ' '!!}
+             <hr style="padding: 0.0rem; margin-top: 0.1rem;margin-bottom: 0.1rem">
+             Departament:  {!! $task->departament->name or ' '!!} 
+             <hr style="padding: 0.0rem; margin-top: 0.1rem;margin-bottom: 0.1rem">
+             Create de:  {!! $task->p_create->name or ' '!!} 
+             <hr style="padding: 0.0rem; margin-top: 0.1rem;margin-bottom: 0.1rem">
+             Asignat:  {!! $task->p_assign->name or ' '!!} 
+             <hr style="padding: 0.0rem; margin-top: 0.1rem;margin-bottom: 0.1rem">
         <table class="table table-responsive" id="tasks-table">
         @foreach($watchers as $watcher)
         <tr>
-            <th style="padding: 0.1rem"> {!! $watcher->user->name!!} {!! $watcher->task->pers_assign!!}</th>
+            <th style="padding: 0.1rem">
+            <a href="{!! route('informatii', [$watcher->task->pers_assign]) !!}"><code>
+                          {!! $watcher->user->name !!}</code></a>
+             {{-- {!! $watcher->user->name!!} {!! $watcher->task->pers_assign!!}</th> --}}
             <th style="padding: 0.1rem">
                 {!! Form::open(['route' => ['watchers.destroy', $watcher->id], 'method' => 'delete']) !!}
                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>',
@@ -148,9 +161,10 @@
                     <div class="col-md-4"> <h6 class="blockquote-footer">{{ $comment->created_at }} </h6></div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-8">{{ $comment->body }} </div>
+                    <div class="col-lg-8" name="body"><?php echo wordwrap($comment->body, 3000, "<br />");?></div>
+                    {{-- <div class="col-lg-8">{{ $comment->body }} </div> --}}
                 </div>
-                
+                <hr>
                 @endforeach
             </table> 
         </div>
@@ -183,10 +197,7 @@
 <script>
 CKEDITOR.replace( 'body' );
 </script> --}}
-<script src="{{ asset ('/vendor/ckeditor/ckeditor.js')}}"></script>
-<script src="{{ asset ('/vendor/ckeditor/adapters/jquery.js')}}"></script>
-{{-- <script src="{{ asset ('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script> --}}
-{{-- <script src="{{ asset ('/vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script> --}}
+
 <script>
 // $('body').ckeditor();
 // $('.textarea').ckeditor(); // if class is prefered.

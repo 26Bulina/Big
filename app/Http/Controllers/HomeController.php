@@ -8,6 +8,7 @@ use App\Models\repository;
 use App\Models\departament;
 use App\Models\notif;
 use Auth;
+use App\ Summernote;
 
 class HomeController extends Controller
 {

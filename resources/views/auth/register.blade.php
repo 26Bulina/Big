@@ -67,7 +67,7 @@
                                              
                         ?>
                         <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{!! Form::label('employee_id', 'employee_id :')  !!}</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right">{!! Form::label('employee_id', 'Name:')  !!}</label>
                         <div class="col-md-6">
                             {!! Form::select('employee_id',  $employees, null ,[ 'placeholder' => 'cauta-ti numele...','class' => 'form-control'])!!} 
                             <i style="color: #7B89A1FF;"> (Daca numele tau nu se regaseste in lista, ia legatura cu departamentul HR)</i>

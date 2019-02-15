@@ -83,8 +83,7 @@ class Employee extends Model
         'address' => 'min:5',
         'start_date' => 'sometimes|required',
         'personal_phone'=>'regex:/(07)[0-9]{8}/',
-        'job' => 'required',
-        'superior_id' => 'required'
+        'job' => 'required'
     ];
 
 

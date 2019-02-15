@@ -71,7 +71,7 @@
             <th colspan="3">Action</th>
         </tr>
     </thead>
- <h3> Task-uri asignate mie:</h3>
+ <h3 style="color: #4B6BB3BD;"> Task-uri asignate mie:</h3>
 
  @foreach($tasks_assigned as $task)
 
@@ -139,7 +139,7 @@
             <th colspan="3">Action</th>
         </tr>
     </thead>
- <h3> Task-uri de observat:</h3>
+ <h3 style="color: #4B6BB3BD;"> Task-uri de observat:</h3>
 
  @foreach($tasks_w as $task)
 {{-- {{ dd($task)}} --}}
@@ -206,7 +206,7 @@
             <th colspan="3">Action</th>
         </tr>
     </thead>
- <h3>Task-uri create de mine:</h3>
+ <h3 style="color: #4B6BB3BD;">Task-uri create de mine:</h3>
 
  @foreach($tasks_created as $task)
 

@@ -45,7 +45,7 @@ class repositoryController extends AppBaseController
                     ->join('employees as e', 'e.id', '=', 'u.employee_id')
                     ->join('jobs as j', 'j.id', '=', 'e.job')
                     ->join('departaments as d', 'd.id', '=', 'j.departament_id')
-                    ->join('tasks as t', 'd.id', '=', 't.departament_id')
+                    // ->join('tasks as t', 'd.id', '=', 't.departament_id')
                     ->where('u.id',Auth::user()->id)
                     ->first();
             // dd($us_dep_task->did); // departamentul userului logat.
@@ -77,7 +77,7 @@ $repositories = repository::join('departaments as d', 'd.id', '=', 'repositories
                     ->join('employees as e', 'e.id', '=', 'u.employee_id')
                     ->join('jobs as j', 'j.id', '=', 'e.job')
                     ->join('departaments as d', 'd.id', '=', 'j.departament_id')
-                    ->join('tasks as t', 'd.id', '=', 't.departament_id')
+                    // ->join('tasks as t', 'd.id', '=', 't.departament_id')
                     ->where('u.id',Auth::user()->id)
                     ->first();
             // dd($us_dep_task->did); // departamentul userului logat.

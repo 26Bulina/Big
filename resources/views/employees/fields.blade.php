@@ -19,7 +19,7 @@
 <!-- Address Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('address', 'Address:') !!}
-    {!! Form::textarea('address', null, ['class' => 'form-control']) !!}
+    {!! Form::text('address', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Personal Phone Field -->
@@ -64,12 +64,12 @@
         {!! Form::number('admin', null, ['class' => 'form-control']) !!}
     </div>
 
-<!-- Photo Field -->
+{{-- <!-- Photo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('photo', 'Photo:') !!}
     {!! Form::file('photo') !!}
 </div>
-<div class="clearfix"></div>
+<div class="clearfix"></div> --}}
 
 <!-- Hours Norm Field -->
 <div class="form-group col-sm-6">
